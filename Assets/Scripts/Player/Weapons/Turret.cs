@@ -8,21 +8,35 @@ public class Turret : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField]
-    private float damage = 2.5f;
-    private float damageInit;
+    private int damage = 2;
+    private int damageInit;
     [SerializeField]
-    private float fireRate = 5f;
+    private float fireRate = 2f;
     private float fireRateInit;
+    private float timerFireRate;
+    [SerializeField]
+    private float fireSpeed = 20f;
+    private float fireSpeedInit;
+    [SerializeField]
+    private float range = 20f;
+    private float rangeInit;
     [SerializeField]
     private float rotationSpeed = 2.5f;
     private float rotationSpeedInit;
     [SerializeField]
     private bool aimTarget;
     [SerializeField]
-    Transform target;
+    private Transform target;
 
+
+    [Header("Objects")]
     [SerializeField]
-    PlayerManager playerManager;
+    private PlayerManager playerManager;
+    [SerializeField]
+    private GameObject laserPref;
+    [SerializeField]
+    private List<Transform> laserMuzzles = new List<Transform>();
+    private int indMuzzle = 0;
 
     [Header("Counter errors")]
     [SerializeField]
@@ -40,6 +54,7 @@ public class Turret : MonoBehaviour
 
     void AimTarget()
     {
+
         if(aimTarget && target != null)
         {
             Vector3 selfPos = new Vector3(transform.position.x, transform.position.z, 0);
@@ -49,9 +64,8 @@ public class Turret : MonoBehaviour
             
             float _angleDiff = AngleDiff(rotation.eulerAngles.y, transform.rotation.eulerAngles.y);
 
-            if (_angleDiff < -errorRotation && _angleDiff > errorRotation)
+            if (_angleDiff < -errorRotation || _angleDiff > errorRotation)
             {
-                print("Change");
                 transform.rotation = rotation;
             }
         }
@@ -60,14 +74,42 @@ public class Turret : MonoBehaviour
             Camera cam = playerManager.playerCamera.self.GetComponent<Camera>();
 
             Vector2 selfPos = cam.WorldToScreenPoint(transform.position);
-            Quaternion rotation = Quaternion.LookRotation(selfPos, Input.mousePosition);
+            float angle = GetAngle(selfPos, Input.mousePosition);
+            Quaternion rotation = Quaternion.Euler(0, angle, 0);
 
             float _angleDiff = AngleDiff(rotation.eulerAngles.y, transform.rotation.eulerAngles.y);
 
-            if (_angleDiff < -errorRotation && _angleDiff > errorRotation)
+            if (_angleDiff < -errorRotation || _angleDiff > errorRotation)
             {
                 transform.rotation = rotation;
             }
+            transform.rotation = rotation;
         }
+    }
+
+    public void Fire()
+    {
+        if (timerFireRate > 0)
+        {
+            print(timerFireRate);
+            timerFireRate -= Time.deltaTime;
+            return;
+        }
+        else
+        {
+            indMuzzle++;
+            if (indMuzzle >= laserMuzzles.Count)
+            {
+                indMuzzle = 0;
+            }
+
+            Laser laser = Instantiate(laserPref).GetComponent<Laser>();
+            laser.Set(damage, fireSpeed, range);
+            laser.transform.position = transform.position;
+            laser.transform.rotation = Quaternion.Euler(5, transform.rotation.eulerAngles.y, 0);
+
+            timerFireRate = 1 / fireRate;
+        }
+
     }
 }

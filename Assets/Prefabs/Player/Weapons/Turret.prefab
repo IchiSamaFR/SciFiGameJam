@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c974b7faa49884d8c61e350f5a3ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2.5
+  damage: 2
   fireRate: 5
+  fireSpeed: 20
+  range: 20
   rotationSpeed: 2.5
   aimTarget: 0
+  target: {fileID: 0}
   playerManager: {fileID: 0}
+  laserPref: {fileID: 6998032964351009620, guid: ef8c60ae3d7b10e488da197bd36d13a9, type: 3}
+  laserMuzzles: []
   errorRotation: 2
 --- !u!1001 &383386857520240421
 PrefabInstance:
