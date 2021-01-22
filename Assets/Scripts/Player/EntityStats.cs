@@ -24,6 +24,10 @@ public class EntityStats : MonoBehaviour
     private float maxSpeedInit;
 
     [SerializeField]
+    private float accelSpeed = 2f;
+    private float accelSpeedInit;
+
+    [SerializeField]
     private float brakeSpeed = 0.15f;
     private float brakeSpeedInit;
     [SerializeField]
@@ -58,6 +62,9 @@ public class EntityStats : MonoBehaviour
     public float MaxSpeedInit { get => maxSpeedInit; set => maxSpeedInit = value; }
     public float ActualSpeed { get => GetHypot(rb.velocity); }
 
+    public float AccelSpeed { get => accelSpeed; set => accelSpeed = value; }
+    public float AccelSpeedInit { get => accelSpeedInit; set => accelSpeedInit = value; }
+
     public float BrakeSpeed { get => brakeSpeed; set => brakeSpeed = value; }
     public float BrakeSpeedInit { get => brakeSpeedInit; set => brakeSpeedInit = value; }
 
@@ -68,7 +75,7 @@ public class EntityStats : MonoBehaviour
     public float ErrorRotation { get => errorRotation; set => errorRotation = value; }
     #endregion
 
-    void Init()
+    public void Init()
     {
         rb = GetComponent<Rigidbody>();
 

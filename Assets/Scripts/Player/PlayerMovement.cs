@@ -10,43 +10,23 @@ using static KeyCollection;
 public class PlayerMovement : MonoBehaviour
 {
     PlayerManager playerManager;
-
-    [Header("Stats Instantiate")]
-    [SerializeField]
-    private float maxSpeed = 7;
-    private float maxSpeedInit;
-    [SerializeField]
-    private float accelSpeed = 2.5f;
-    private float accelSpeedInit;
-    [SerializeField]
-    private float brakeSpeed = 0.15f;
-    private float brakeSpeedInit;
-    [SerializeField]
-    private float rotationSpeed = 2.5f;
-    private float rotationSpeedInit;
-
     Quaternion rotationToGetEuler = new Quaternion();
-
-    [Header("Counter errors")]
-    [SerializeField]
-    private float errorBrake = 0.02f;
-    [SerializeField]
-    private float errorRotation = 2f;
-
-
     Rigidbody rb;
 
-    public float ActualSpeed { get => GetHypot(rb.velocity); }
-    public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
-    public float AccelSpeed { get => accelSpeed; set => accelSpeed = value; }
-    public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
+    public float actualSpeed { get => playerManager.playerStats.ActualSpeed; }
+
+    public float accelSpeed { get => playerManager.playerStats.AccelSpeed; set => playerManager.playerStats.AccelSpeed = value; }
+    public float maxSpeed { get => playerManager.playerStats.MaxSpeed; set => playerManager.playerStats.MaxSpeed = value; }
+    public float rotationSpeed { get => playerManager.playerStats.RotationSpeed; set => playerManager.playerStats.RotationSpeed = value; }
+
+
+    public float brakeSpeed { get => playerManager.playerStats.BrakeSpeed; set => playerManager.playerStats.BrakeSpeed = value; }
+    public float errorBrake { get => playerManager.playerStats.ErrorBrake; set => playerManager.playerStats.ErrorBrake = value; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerManager = GetComponent<PlayerManager>();
-
-        maxSpeedInit = maxSpeed;
     }
 
     void Update()
@@ -55,35 +35,69 @@ public class PlayerMovement : MonoBehaviour
         UpdateMovement();
     }
 
+    /*
+     * 
+     */
     void UpdateMovement()
     {
+        Vector3 _forceToAdd = new Vector3();
+
         if (Input.GetKey(forwardKey))
         {
-            rb.AddForce(transform.forward * accelSpeed);
+            _forceToAdd += transform.forward * accelSpeed;
+            if (Input.GetKey(brakeKey))
+            {
+                _forceToAdd += Brake(0.6f);
+            }
         }
         else if (Input.GetKey(backwardKey))
         {
-            rb.AddForce(-transform.forward * accelSpeed);
+            _forceToAdd += - transform.forward * accelSpeed;
             if (Input.GetKey(brakeKey))
             {
-                Brake(0.1f);
+                _forceToAdd += Brake(0.6f);
             }
         }
         else if (Input.GetKey(brakeKey))
         {
-            Brake();
+            _forceToAdd += Brake();
         }
 
-        if (ActualSpeed > MaxSpeed)
+        if (actualSpeed > maxSpeed)
         {
-            rb.AddForce(-transform.forward * (ActualSpeed - MaxSpeed));
+            _forceToAdd += - transform.forward * (actualSpeed - maxSpeed);
         }
-        else if (ActualSpeed < -MaxSpeed)
+        else if (actualSpeed < -maxSpeed)
         {
-            rb.AddForce(transform.forward * (ActualSpeed - MaxSpeed));
+            _forceToAdd += transform.forward * (actualSpeed - maxSpeed);
+        }
+
+        if (!float.IsNaN(_forceToAdd.x) && !float.IsNaN(_forceToAdd.y) && !float.IsNaN(_forceToAdd.z))
+        {
+            rb.AddForce(_forceToAdd);
         }
     }
 
+    Vector3 Brake(float intensity = 1)
+    {
+        Vector3 velocity = rb.velocity;
+
+
+        if(!float.IsNaN(velocity.x) && !float.IsNaN(velocity.y) && !float.IsNaN(velocity.z))
+        {
+            return -velocity * brakeSpeed;
+        }
+
+        if (intensity == 1 
+            && actualSpeed < errorBrake && actualSpeed > -errorBrake
+            && rb.velocity != Vector3.zero)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        return new Vector3();
+    }
+    /*
     void Brake(float intensity = 1)
     {
         Vector3 velocity = rb.velocity * intensity;
@@ -93,19 +107,20 @@ public class PlayerMovement : MonoBehaviour
             velocity = velocity / GetHypot(velocity);
         }
 
-        if(!float.IsNaN(velocity.x) && !float.IsNaN(velocity.y) && !float.IsNaN(velocity.z))
+        if (!float.IsNaN(velocity.x) && !float.IsNaN(velocity.y) && !float.IsNaN(velocity.z))
         {
             rb.AddForce(-velocity * brakeSpeed);
         }
 
-        if (intensity == 1 
-            && ActualSpeed < errorBrake && ActualSpeed > -errorBrake
+        if (intensity == 1
+            && actualSpeed < errorBrake && actualSpeed > -errorBrake
             && rb.velocity != Vector3.zero)
         {
-            
+
             rb.velocity = Vector3.zero;
         }
     }
+    */
 
     void UpdateRotation()
     {
@@ -117,20 +132,14 @@ public class PlayerMovement : MonoBehaviour
         if (rotationToGetEuler.eulerAngles.y != transform.rotation.eulerAngles.y)
         {
             float _angleDiff = AngleDiff(rotationToGetEuler.eulerAngles.y, transform.rotation.eulerAngles.y);
-            if (_angleDiff > errorRotation)
-            {
-                transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0), 
-                                                     Quaternion.Euler(0, rotationToGetEuler.eulerAngles.y + 180, 0), 
-                                                     rotationSpeed * Time.deltaTime);
-                //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + -Time.deltaTime * rotationSpeed * 60, 0);
-            }
-            else if (_angleDiff < -errorRotation)
-            {
-                transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0),
-                                                     Quaternion.Euler(0, rotationToGetEuler.eulerAngles.y + 180, 0),
-                                                     rotationSpeed * Time.deltaTime);
-                //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + Time.deltaTime * rotationSpeed * 60, 0);
-            }
+
+            /* Lerp between actual position and angle to get
+             */
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0),
+                                                 Quaternion.Euler(0, rotationToGetEuler.eulerAngles.y + 180, 0),
+                                                 rotationSpeed * Time.deltaTime);
+
+            //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + -Time.deltaTime * rotationSpeed * 60, 0);
         }
     }
 }

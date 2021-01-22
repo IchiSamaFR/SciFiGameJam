@@ -102,9 +102,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3828038923918050020}
   - component: {fileID: 2452993856887229458}
-  - component: {fileID: 7163459659481531756}
-  - component: {fileID: 396722584722970198}
   - component: {fileID: 3644499044855591759}
+  - component: {fileID: 7163459659481531756}
+  - component: {fileID: 1014778999388172759}
+  - component: {fileID: 396722584722970198}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -143,39 +144,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 3
---- !u!114 &7163459659481531756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3828038923918050023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d9595511b792d74bb7d124220827ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 3
-  accelSpeed: 1.5
-  brakeSpeed: 1.5
-  rotationSpeed: 2
-  errorBrake: 0.02
-  errorRotation: 2
---- !u!114 &396722584722970198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3828038923918050023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40c1b001d53ca848b48ecfabffda8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  self: {fileID: 3828038924978270430}
-  target: {fileID: 3828038923918050020}
-  zoom: 0
 --- !u!114 &3644499044855591759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +162,54 @@ MonoBehaviour:
   turrets:
   - {fileID: 8179056190589090672}
   - {fileID: 262123870128723134}
+--- !u!114 &7163459659481531756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828038923918050023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d9595511b792d74bb7d124220827ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1014778999388172759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828038923918050023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09537b9685825248a8fe95a1292c494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  maxShield: 0
+  maxSpeed: 0
+  accelSpeed: 2
+  brakeSpeed: 2
+  rotationSpeed: 2
+  errorBrake: 0.02
+  errorRotation: 2
+  getDestroyedEffects: {fileID: 0}
+--- !u!114 &396722584722970198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828038923918050023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40c1b001d53ca848b48ecfabffda8fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  self: {fileID: 3828038924978270430}
+  target: {fileID: 3828038923918050020}
+  zoom: 0
 --- !u!1 &3828038924637122978
 GameObject:
   m_ObjectHideFlags: 0
