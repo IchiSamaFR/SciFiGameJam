@@ -65,11 +65,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (actualSpeed > maxSpeed)
         {
-            _forceToAdd += - transform.forward * (actualSpeed - maxSpeed);
+            _forceToAdd += -rb.velocity * (actualSpeed * 2 - maxSpeed);
         }
         else if (actualSpeed < -maxSpeed)
         {
-            _forceToAdd += transform.forward * (actualSpeed - maxSpeed);
+            _forceToAdd += -rb.velocity * (actualSpeed * 2 - maxSpeed);
         }
 
         if (!float.IsNaN(_forceToAdd.x) && !float.IsNaN(_forceToAdd.y) && !float.IsNaN(_forceToAdd.z))

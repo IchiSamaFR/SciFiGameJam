@@ -10,13 +10,15 @@ public class EntityStats : MonoBehaviour
     #region -- Assign variable --
     [Header("Stats Instantiate")]
     [SerializeField]
-    private int maxHealth;
+    private int maxHealth = 10;
     private int maxHealthInit;
+    [SerializeField]
     private int actualHealth;
 
     [SerializeField]
     private int maxShield;
     private int maxShieldInit;
+    [SerializeField]
     private int actualShield;
 
     [SerializeField]
@@ -73,6 +75,8 @@ public class EntityStats : MonoBehaviour
 
     public float ErrorBrake { get => errorBrake; set => errorBrake = value; }
     public float ErrorRotation { get => errorRotation; set => errorRotation = value; }
+
+    public GameObject GetDestroyedEffects { get => getDestroyedEffects; set => getDestroyedEffects = value; }
     #endregion
 
     public void Init()
@@ -89,7 +93,7 @@ public class EntityStats : MonoBehaviour
 
     public void GetDamage(int amount)
     {
-        if(actualHealth <= 0)
+        if (actualHealth <= 0)
         {
             return;
         }
@@ -118,7 +122,13 @@ public class EntityStats : MonoBehaviour
     }
     public virtual void GetDestroyed()
     {
-    
+        if(GetDestroyedEffects != null)
+        {
+            GameObject _effect = Instantiate(GetDestroyedEffects);
+            _effect.transform.position = transform.position;
+            Destroy(_effect, 10);
+        }
+        Destroy(gameObject);
     }
 
     public void GetHeal(int amount)

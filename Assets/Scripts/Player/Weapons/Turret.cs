@@ -91,7 +91,7 @@ public class Turret : MonoBehaviour
     {
         if (timerFireRate > 0)
         {
-            print(timerFireRate);
+
             timerFireRate -= Time.deltaTime;
             return;
         }

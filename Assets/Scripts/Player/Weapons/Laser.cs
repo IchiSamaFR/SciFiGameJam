@@ -28,8 +28,9 @@ public class Laser : MonoBehaviour
             && hit.transform.tag != "Player")
         {
             EntityStats _entity = hit.transform.GetComponent<EntityStats>();
-            if(_entity != null)
+            if (_entity != null)
             {
+                print("entity");
                 _entity.GetDamage(damage);
             }
             Destroy(gameObject);
