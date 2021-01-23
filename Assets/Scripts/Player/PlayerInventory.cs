@@ -25,7 +25,7 @@ public class PlayerInventory : MonoBehaviour
             if(item.Id == _item.Id && !_item.Full)
             {
                 item.Amount = _item.AddAmount(item.Amount);
-                print(item.Amount);
+
                 if (item.Amount == 0)
                 {
                     break;
@@ -37,12 +37,5 @@ public class PlayerInventory : MonoBehaviour
         {
             items.Add(item);
         }
-
-        string show = "";
-        foreach (Item _item in items)
-        {
-            show += _item.Name + " : " + _item.Amount + "/" + item.MaxAmount + " > " + item.Full + "\n";
-        }
-        print(show);
     }
 }

@@ -1696,6 +1696,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
+      propertyPath: ressourcesToDrop.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
+      propertyPath: ressourcesToDrop.Array.data[0].amount
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
+      propertyPath: ressourcesToDrop.Array.data[1].id
+      value: ressource_iridium
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
+      propertyPath: ressourcesToDrop.Array.data[1].amount
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
 --- !u!1001 &363950617

@@ -14,6 +14,7 @@ public class Asteroid : EntityStats
     [Header("Ressources")]
     [SerializeField]
     private List<RessourcesDroped> ressourcesToDrop = new List<RessourcesDroped>();
+    private ItemCollection it { get => ItemCollection.instance; }
 
     public List<RessourcesDroped> RessourcesToDrop { get => ressourcesToDrop; set => ressourcesToDrop = value; }
 
@@ -30,17 +31,24 @@ public class Asteroid : EntityStats
 
     void CreateDrop()
     {
-        ItemCollection it = ItemCollection.instance;
         Vector3 pos = transform.position;
-        foreach (RessourcesDroped item in ressourcesToDrop)
+
+        for (int i = 0; i < ressourcesToDrop.Count; i++)
         {
-            Item _item = it.GetItem(item.id);
-            GameObject _obj = Instantiate(_item.Prefab);
-            _obj.GetComponent<Ressource>().Item = _item;
-            _obj.GetComponent<Ressource>().Item.AddAmount(item.amount);
-            _obj.transform.position = new Vector3(Random.Range(pos.x - 0.5f, pos.x + 0.5f),
-                                                  0,
-                                                  Random.Range(pos.z - 0.5f, pos.z + 0.5f));
+            RessourcesDroped item = ressourcesToDrop[i];
+            int amount = item.amount;
+
+            while (amount > 0)
+            {
+                Item _item = it.GetItem(item.id);
+
+                GameObject _obj = Instantiate(_item.Prefab);
+                _obj.GetComponent<Ressource>().Item = _item;
+                amount = _obj.GetComponent<Ressource>().Item.AddAmount(amount);
+                _obj.transform.position = new Vector3(Random.Range(pos.x - 0.5f, pos.x + 0.5f),
+                                                      0,
+                                                      Random.Range(pos.z - 0.5f, pos.z + 0.5f));
+            }
         }
     }
 }
