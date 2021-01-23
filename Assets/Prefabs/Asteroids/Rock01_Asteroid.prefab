@@ -57,6 +57,17 @@ MonoBehaviour:
   errorBrake: 0.02
   errorRotation: 2
   getDestroyedEffects: {fileID: 3582264401440393527, guid: 5760ea0111a49ad49bfe23a75d2f46cc, type: 3}
+  ressourcesToDrop:
+  - id: ressource_iridium
+    amount: 40
+  - id: ressource_iridium
+    amount: 40
+  - id: ressource_iridium
+    amount: 40
+  - id: ressource_iridium
+    amount: 40
+  - id: ressource_iridium
+    amount: 40
 --- !u!54 &-1273326938650530613
 Rigidbody:
   m_ObjectHideFlags: 0

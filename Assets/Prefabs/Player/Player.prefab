@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 3644499044855591759}
   - component: {fileID: 7163459659481531756}
   - component: {fileID: 1014778999388172759}
+  - component: {fileID: 8616665717905321812}
   - component: {fileID: 396722584722970198}
   m_Layer: 0
   m_Name: PlayerObject
@@ -159,6 +160,7 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   playerCamera: {fileID: 0}
   playerStats: {fileID: 0}
+  playerInventory: {fileID: 0}
   turrets:
   - {fileID: 8179056190589090672}
   - {fileID: 262123870128723134}
@@ -187,14 +189,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0
+  actualHealth: 0
   maxShield: 0
-  maxSpeed: 0
+  actualShield: 0
+  maxSpeed: 3
   accelSpeed: 2
   brakeSpeed: 2
   rotationSpeed: 2
   errorBrake: 0.02
   errorRotation: 2
   getDestroyedEffects: {fileID: 0}
+--- !u!114 &8616665717905321812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828038923918050023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6b0b45f5546e34db1a9fca4e7f5e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t: {fileID: 0}
 --- !u!114 &396722584722970198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +723,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8468325437920644673, guid: 31f73f638120ca34f9aae0a898d89a40, type: 3}
+--- !u!114 &2525309114929659396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169916331617143194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70ace0b38892fb42a58ff4988ba0e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 3828038923918050020}
 --- !u!1 &6681572835134317176
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +967,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 31f73f638120ca34f9aae0a898d89a40, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31f73f638120ca34f9aae0a898d89a40, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f73f638120ca34f9aae0a898d89a40, type: 3}

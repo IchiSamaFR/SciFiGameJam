@@ -5,11 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCamera))]
 [RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(PlayerInventory))]
 public class PlayerManager : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     public PlayerCamera playerCamera;
     public PlayerStats playerStats;
+    public PlayerInventory playerInventory;
 
     public List<Turret> turrets = new List<Turret>();
 
@@ -18,6 +20,7 @@ public class PlayerManager : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerCamera = GetComponent<PlayerCamera>();
         playerStats = GetComponent<PlayerStats>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void Update()
