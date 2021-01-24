@@ -20,6 +20,18 @@ public class ItemCollection : MonoBehaviour
     }
 
 
+    public List<Item> GetItemsType(string type)
+    {
+        List<Item> lst = new List<Item>();
+        foreach (Item item in itemList)
+        {
+            if (item.Type == type)
+            {
+                lst.Add(new Item(item));
+            }
+        }
+        return lst;
+    }
     public Item GetItem(string id)
     {
         foreach (Item item in itemList)

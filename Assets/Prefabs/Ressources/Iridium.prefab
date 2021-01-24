@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8836e8cc820194fb91a15aa7e0306b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: ressource_iridium
+  amount: 1
 --- !u!135 &5600915669165636328
 SphereCollider:
   m_ObjectHideFlags: 0

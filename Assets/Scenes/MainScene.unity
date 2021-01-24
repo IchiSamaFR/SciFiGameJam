@@ -331,10 +331,11 @@ MonoBehaviour:
   itemList:
   - Id: ressource_iridium
     Name: Iridium
+    Type: ressource
     Prefab: {fileID: 2682994161823816717, guid: 6e74fd5cb89946548b9c630bf8fefc1d, type: 3}
     Sprite: {fileID: 0}
     Amount: 0
-    MaxAmount: 100
+    MaxAmount: 0
 --- !u!1 &113015798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
       propertyPath: ressourcesToDrop.Array.data[0].amount
-      value: 110
+      value: 310
       objectReference: {fileID: 0}
     - target: {fileID: 7825658551814424614, guid: 7dc833d562aeb8c4098ec8a50c7f33e0, type: 3}
       propertyPath: ressourcesToDrop.Array.data[1].id
