@@ -62,7 +62,7 @@ public class EntityStats : MonoBehaviour
 
     public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
     public float MaxSpeedInit { get => maxSpeedInit; set => maxSpeedInit = value; }
-    public float ActualSpeed { get => GetHypot(rb.velocity); }
+    public float ActualSpeed { get => GetHypot(new Vector2(rb.velocity.x, rb.velocity.z)); }
 
     public float AccelSpeed { get => accelSpeed; set => accelSpeed = value; }
     public float AccelSpeedInit { get => accelSpeedInit; set => accelSpeedInit = value; }
@@ -91,7 +91,7 @@ public class EntityStats : MonoBehaviour
         rotationSpeedInit = rotationSpeed;
     }
 
-    public void GetDamage(int amount)
+    public virtual void GetDamage(int amount)
     {
         if (actualHealth <= 0)
         {
@@ -128,10 +128,9 @@ public class EntityStats : MonoBehaviour
             _effect.transform.position = transform.position;
             Destroy(_effect, 10);
         }
-        Destroy(gameObject);
     }
 
-    public void GetHeal(int amount)
+    public virtual void GetHeal(int amount)
     {
         actualHealth += amount;
         if(actualHealth > maxHealth)
@@ -139,7 +138,7 @@ public class EntityStats : MonoBehaviour
             actualHealth = maxHealth;
         }
     }
-    public void GetShield(int amount)
+    public virtual void GetShield(int amount)
     {
         if(actualHealth <= 0)
         {

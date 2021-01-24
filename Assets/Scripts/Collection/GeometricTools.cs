@@ -60,7 +60,17 @@ public static class GeometricTools
      */
     public static float GetHypot(Vector2 pos, Vector2 endPos = new Vector2())
     {
-        if(endPos != new Vector2())
+        if(pos.x < 0)
+            pos = new Vector2(-pos.x, pos.y);
+        if (pos.y < 0)
+            pos = new Vector2(pos.x, -pos.y);
+        if (endPos.x < 0)
+            pos = new Vector2(-endPos.x, endPos.y);
+        if (endPos.y < 0)
+            pos = new Vector2(endPos.x, -endPos.y);
+
+
+        if (endPos != new Vector2())
         {
             pos -= endPos;
         }
@@ -69,7 +79,6 @@ public static class GeometricTools
         float _dirY = pos.y;
         float _hypo = Mathf.Sqrt(_dirX * _dirX
                         + _dirY * _dirY);
-
         return _hypo;
     }
 

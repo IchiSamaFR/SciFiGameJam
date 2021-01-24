@@ -9,4 +9,5 @@ public static class KeyCollection
     public static string leftKey = "q";
     public static string rightKey = "d";
     public static string brakeKey = "left shift";
+    public static string invKey = "e";
 }

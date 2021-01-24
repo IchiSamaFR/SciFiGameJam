@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+using static KeyCollection;
+
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCamera))]
 [RequireComponent(typeof(PlayerStats))]
@@ -36,6 +39,10 @@ public class PlayerManager : MonoBehaviour
             {
                 item.Fire();
             }
+        }
+        if (Input.GetKeyDown(invKey))
+        {
+            playerInventory.Open();
         }
     }
 }

@@ -25,8 +25,9 @@ public class Asteroid : EntityStats
 
     public override void GetDestroyed()
     {
-        CreateDrop();
         base.GetDestroyed();
+        CreateDrop();
+        Destroy(gameObject);
     }
 
     void CreateDrop()
