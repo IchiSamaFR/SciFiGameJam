@@ -29,7 +29,7 @@ public class UIButtonsManager : MonoBehaviour
     {
         instance = this;
     }
-
+    
     /* Change sprite if opened or not
      */
     public void ButtonActive(string name)
@@ -51,7 +51,7 @@ public class UIButtonsManager : MonoBehaviour
                 break;
             }
         }
-
+        
         if (_toSet != null && _toSet.State != state)
         {
             _toSet.State = state;

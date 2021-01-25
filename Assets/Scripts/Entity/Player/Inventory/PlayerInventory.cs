@@ -51,8 +51,9 @@ public class PlayerInventory : MonoBehaviour
         }
 
         isOpen = false;
-        container.Close();
 
+        container.Close();
+        
         UIButtonsManager.instance.ButtonUnactive("bag");
     }
 
