@@ -59,9 +59,8 @@ public class UIShop : MonoBehaviour
                     break;
                 }
             }
-            if (!find)
+            if (!find && itemCollection.ItemExist(item.Id))
             {
-                print(item.Id + " added");
                 itemsInv.Add(itemCollection.GetItem(item.Id));
             }
         }
@@ -115,7 +114,7 @@ public class UIShop : MonoBehaviour
 
         foreach (Item _item in itemsInv)
         {
-            if (item.Id == _item.Id && !_item.Full)
+            if (item.Id == _item.Id)
             {
                 item.Amount = _item.AddAmount(item.Amount);
 
@@ -126,7 +125,7 @@ public class UIShop : MonoBehaviour
             }
         }
 
-        if (item.Amount > 0)
+        if (itemCollection.ItemExist(item.Id) && item.Amount > 0)
         {
             itemsInv.Add(item);
         }

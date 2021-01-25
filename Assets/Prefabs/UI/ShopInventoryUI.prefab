@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiInv: {fileID: 2479370476860066967}
-  uiItemInv: {fileID: 1281218657398298464, guid: c5834c8b13de6164dac1c52dc1bb5978, type: 3}
+  uiItemInv: {fileID: 1281218657398298464, guid: cf7ac7e8ad5a5f84c9b2e6b237a9bc60, type: 3}
   uiContentInv: {fileID: 2479370476165070323}
 --- !u!1 &2479370476860066967
 GameObject:
@@ -807,6 +807,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: 14}
+  m_AnchoredPosition: {x: -450, y: -20}
   m_SizeDelta: {x: 470, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
