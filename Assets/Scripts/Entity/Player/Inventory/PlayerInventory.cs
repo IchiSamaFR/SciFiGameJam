@@ -34,7 +34,9 @@ public class PlayerInventory : MonoBehaviour
             Close();
             return;
         }
+
         isOpen = true;
+        UIButtonsManager.instance.ButtonActive("bag");
 
         container.Open();
         container.RefreshContainer(items);
@@ -47,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
         isOpen = false;
         if(container)
             container.Close();
+        UIButtonsManager.instance.ButtonUnactive("bag");
     }
 
     /* Add item in inventory

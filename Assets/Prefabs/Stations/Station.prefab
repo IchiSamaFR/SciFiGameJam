@@ -212,7 +212,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3ea60bf71b04f448d8128a7dde659e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsInv: []
+  itemsInv:
+  - Id: ressource_iridium
+    Name: 
+    Type: 
+    Prefab: {fileID: 0}
+    Sprite: {fileID: 0}
+    Amount: 100
+    MaxAmount: 0
+    Price: 0
   itemsAble:
   - Id: ressource_iridium
     Buy: 1

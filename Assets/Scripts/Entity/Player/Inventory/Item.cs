@@ -16,7 +16,7 @@ public class Item
 
     public bool Full => Amount / MaxAmount == 1 ? true : false;
 
-    public Item(string Id, string Name, string Type, GameObject Prefab, Sprite Sprite, int MaxAmount = 100)
+    public Item(string Id, string Name, string Type, GameObject Prefab, Sprite Sprite, int MaxAmount = 100, int Price = 0)
     {
         this.Id = Id;
         this.Name = Name;
@@ -25,6 +25,7 @@ public class Item
         this.Sprite = Sprite;
         this.Amount = 0;
         this.MaxAmount = MaxAmount;
+        this.Price = Price;
     }
 
     public Item(Item item)
@@ -36,6 +37,7 @@ public class Item
         this.Sprite = item.Sprite;
         this.Amount = item.Amount;
         this.MaxAmount = item.MaxAmount;
+        this.Price = item.Price;
     }
 
     public int AddAmount(int amount)

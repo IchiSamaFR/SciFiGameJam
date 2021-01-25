@@ -107,4 +107,16 @@ public class ItemCollection : MonoBehaviour
             return -1;
         }
     }
+
+    public bool ItemExist(string id)
+    {
+        foreach (var item in itemList)
+        {
+            if(item.Id == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
