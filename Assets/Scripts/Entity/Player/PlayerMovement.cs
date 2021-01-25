@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     Quaternion rotationToGetEuler = new Quaternion();
     Rigidbody rb;
 
+    [SerializeField]
+    private ParticleSystem[] thruster;
+
     public float actualSpeed { get => playerManager.playerStats.ActualSpeed; }
 
     public float accelSpeed { get => playerManager.playerStats.AccelSpeed; set => playerManager.playerStats.AccelSpeed = value; }
@@ -76,6 +79,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(_forceToAdd);
         }
+
+        foreach (var item in thruster)
+        {
+            float burst = (0.01f / (actualSpeed / maxSpeed));
+            if(burst > 3)
+            {
+                burst = 10000;
+            }
+            item.emission.SetBurst(0, new ParticleSystem.Burst(0.1f, 10, -1, burst));
+        }
     }
 
     Vector3 Brake(float intensity = 1)
@@ -97,30 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
         return new Vector3();
     }
-    /*
-    void Brake(float intensity = 1)
-    {
-        Vector3 velocity = rb.velocity * intensity;
-
-        if (GetHypot(velocity) < 0.2f)
-        {
-            velocity = velocity / GetHypot(velocity);
-        }
-
-        if (!float.IsNaN(velocity.x) && !float.IsNaN(velocity.y) && !float.IsNaN(velocity.z))
-        {
-            rb.AddForce(-velocity * brakeSpeed);
-        }
-
-        if (intensity == 1
-            && actualSpeed < errorBrake && actualSpeed > -errorBrake
-            && rb.velocity != Vector3.zero)
-        {
-
-            rb.velocity = Vector3.zero;
-        }
-    }
-    */
 
     void UpdateRotation()
     {
@@ -138,8 +127,6 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0),
                                                  Quaternion.Euler(0, rotationToGetEuler.eulerAngles.y + 180, 0),
                                                  rotationSpeed * Time.deltaTime);
-
-            //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + -Time.deltaTime * rotationSpeed * 60, 0);
         }
     }
 }

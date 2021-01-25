@@ -335,7 +335,7 @@ MonoBehaviour:
     Prefab: {fileID: 2682994161823816717, guid: 6e74fd5cb89946548b9c630bf8fefc1d, type: 3}
     Sprite: {fileID: 0}
     Amount: 0
-    MaxAmount: 10
+    MaxAmount: -1
 --- !u!1 &113015798
 GameObject:
   m_ObjectHideFlags: 0
@@ -9426,7 +9426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5907326232327255278, guid: 19aa28375dee8a94bb58c5175b24eacc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000062694703
+      value: -0.00003779661
       objectReference: {fileID: 0}
     - target: {fileID: 5907326232327255278, guid: 19aa28375dee8a94bb58c5175b24eacc, type: 3}
       propertyPath: m_SizeDelta.x
