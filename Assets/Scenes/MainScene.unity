@@ -1209,6 +1209,7 @@ GameObject:
   - component: {fileID: 303525447}
   - component: {fileID: 303525446}
   - component: {fileID: 303525448}
+  - component: {fileID: 303525449}
   m_Layer: 5
   m_Name: Bag
   m_TagString: Untagged
@@ -1297,7 +1298,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.39215687}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1315,7 +1316,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 303525446}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 303525449}
+        m_TargetAssemblyTypeName: UIBtnInventory, Assembly-CSharp
+        m_MethodName: Action
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &303525449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303525444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1a37abe8a359e469183c4c1c373341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &306874573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2128,16 +2153,19 @@ MonoBehaviour:
     Active: {fileID: 21300000, guid: 232659d83507c0849a113d7ceb34ccdf, type: 3}
     UnActive: {fileID: 21300000, guid: 7d567d6fcd872984f98f54b4ec680754, type: 3}
     State: 0
+    Interactable: 1
   - Name: shop
     Obj: {fileID: 448759162}
     Active: {fileID: 21300000, guid: e8135c33f0278b343a6f4c9dced7b41c, type: 3}
     UnActive: {fileID: 21300000, guid: ee725d8379ed2bc48b28880ca89675e2, type: 3}
     State: 0
+    Interactable: 1
   - Name: setting
     Obj: {fileID: 878104296}
     Active: {fileID: 21300000, guid: 2cce9e4a53395fa469ed79bec037b0fb, type: 3}
     UnActive: {fileID: 21300000, guid: 66d59423f422c2e488ed29a1c35d73ec, type: 3}
     State: 0
+    Interactable: 1
 --- !u!1001 &433372636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2298,6 +2326,7 @@ GameObject:
   - component: {fileID: 448759165}
   - component: {fileID: 448759164}
   - component: {fileID: 448759163}
+  - component: {fileID: 448759166}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -2348,7 +2377,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.39215687}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2366,7 +2395,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 448759164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 448759166}
+        m_TargetAssemblyTypeName: UIBtnShop, Assembly-CSharp
+        m_MethodName: Action
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &448759164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,6 +2446,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448759161}
   m_CullTransparentMesh: 0
+--- !u!114 &448759166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448759161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752b309ca88e4d94f9f2e60ef234cc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &462204641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4003,8 +4056,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 10}
-  m_SizeDelta: {x: 250, y: 250}
+  m_AnchoredPosition: {x: -20, y: 10}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 1, y: 0}
 --- !u!1001 &678315804
 PrefabInstance:
@@ -5007,7 +5060,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.39215687}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5025,7 +5078,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 878104298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 878104295}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &878104298
 MonoBehaviour:
   m_ObjectHideFlags: 0

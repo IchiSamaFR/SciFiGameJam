@@ -8,13 +8,18 @@ public class UIButtonsManager : MonoBehaviour
     public static UIButtonsManager instance;
 
     [System.Serializable]
-    public struct UIBut
+    public class UIBut
     {
         public string Name;
         public Transform Obj;
         public Sprite Active;
         public Sprite UnActive;
-        public bool State;
+        public bool State = false;
+        public bool Interactable = true;
+
+        private float set;
+        
+        public float Set { get => set; set => set = value; }
     }
 
     [SerializeField]
@@ -25,7 +30,8 @@ public class UIButtonsManager : MonoBehaviour
         instance = this;
     }
 
-
+    /* Change sprite if opened or not
+     */
     public void ButtonActive(string name)
     {
         SetActive(name, true);
@@ -36,24 +42,83 @@ public class UIButtonsManager : MonoBehaviour
     }
     private void SetActive(string name, bool state)
     {
-        UIBut toSet = new UIBut();
+        UIBut _toSet = null;
         foreach (var but in buttons)
         {
             if (but.Name == name)
             {
-                toSet = but;
+                _toSet = but;
                 break;
             }
         }
 
-        if (toSet.Name != "")
+        if (_toSet != null && _toSet.State != state)
         {
-            toSet.State = state;
-            toSet.Obj.GetComponent<Button>().interactable = !state;
+            _toSet.State = state;
             if (state == true)
-                toSet.Obj.GetComponent<Image>().sprite = toSet.Active;
+                _toSet.Obj.GetComponent<Image>().sprite = _toSet.Active;
             if (state == false)
-                toSet.Obj.GetComponent<Image>().sprite = toSet.UnActive;
+                _toSet.Obj.GetComponent<Image>().sprite = _toSet.UnActive;
         }
+    }
+
+    /* Change interactable if opened or not
+     */
+    public void ButtonInteractable(string name)
+    {
+        SetInteractable(name, true);
+    }
+    public void ButtonNotInteractable(string name)
+    {
+        SetInteractable(name, false);
+    }
+    private void SetInteractable(string name, bool state)
+    {
+        UIBut _toSet = null;
+        foreach (var but in buttons)
+        {
+            if (but.Name == name)
+            {
+                _toSet = but;
+                break;
+            }
+        }
+
+        if (_toSet != null && _toSet.Interactable != state)
+        {
+            _toSet.Obj.GetComponent<Button>().interactable = state;
+            _toSet.Interactable = state;
+            if(_toSet.State == true)
+            {
+                SetActive(name, false);
+            }
+        }
+    }
+
+    /* Return button
+     */
+    public UIButton GetButton(string name)
+    {
+        foreach (var but in buttons)
+        {
+            if (but.Name == name)
+            {
+                return but.Obj.GetComponent<UIButton>();
+            }
+        }
+        return null;
+    }
+
+    public void ActionButton(string name)
+    {
+        GetButton(name).GetComponent<UIButton>().Action();
+    }
+    public void OpenButton(string name)
+    {
+        GetButton(name).GetComponent<UIButton>().Open();
+    }
+    public void CloseButton(string name)
+    {
+        GetButton(name).GetComponent<UIButton>().Close();
     }
 }

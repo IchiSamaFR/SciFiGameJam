@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIShop : MonoBehaviour
+public class ShopInventory : MonoBehaviour
 {
     [System.Serializable]
     public struct ShopItemStat
@@ -14,7 +14,6 @@ public class UIShop : MonoBehaviour
     }
 
     private PlayerInventory targetInv;
-    private ItemCollection itemCollection { get => ItemCollection.instance; }
 
     [SerializeField]
     List<Item> itemsInv = new List<Item>();
@@ -26,11 +25,17 @@ public class UIShop : MonoBehaviour
     private GameObject UIInv;
     private UIContainer container;
 
-    private bool isOpen = false;
+    private bool isOpen = true;
+
+    private ItemCollection itemCollection { get => ItemCollection.instance; }
+    public bool IsOpen { get => isOpen; set => isOpen = value; }
 
     void Start()
     {
         SetInv();
+        container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform)
+                    .GetComponent<UIContainer>();
+        Close();
     }
 
     /* Set of the shop inventory by ItemsStat and ItemAlready In
@@ -68,23 +73,18 @@ public class UIShop : MonoBehaviour
 
     /* Open UI Shop
      */
-    public void Open(PlayerInventory target)
+    public void Open(PlayerInventory target = null)
     {
-        if(container == null)
+        if (isOpen || !target)
         {
-            container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform).GetComponent<UIContainer>();
-        }
-
-        if (isOpen || target)
-        {
-            Close();
             return;
         }
-
+        
         targetInv = target;
+        targetInv.Open();
 
         isOpen = true;
-
+        UIButtonsManager.instance.ButtonActive("shop");
         container.Open();
         container.RefreshContainer(itemsInv);
     }
@@ -93,12 +93,9 @@ public class UIShop : MonoBehaviour
      */
     public void Close()
     {
-        if (targetInv)
-        {
-            targetInv = null;
-        }
 
         isOpen = false;
+        UIButtonsManager.instance.ButtonUnactive("shop");
         container.Close();
     }
 

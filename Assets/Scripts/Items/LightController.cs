@@ -19,7 +19,6 @@ public class LightController : MonoBehaviour
         {
             SetStatusChild(group);
         }
-        Debug.Log("Light changed : " + x);
     }
     int x = 0;
     void SetStatusChild(Transform group)

@@ -160,9 +160,10 @@ GameObject:
   - component: {fileID: 2621529548348088997}
   - component: {fileID: 2922799553622536890}
   - component: {fileID: 8448765417906596537}
+  - component: {fileID: 7822709583717216420}
   m_Layer: 0
   m_Name: Station
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +228,19 @@ MonoBehaviour:
     Sell: 1
     PriceDiff: 10
   UIInv: {fileID: 2479370476462550722, guid: 71cfbfc5f40f99947866772a931c5ece, type: 3}
+--- !u!135 &7822709583717216420
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621529548348088996}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: -3, y: 0, z: 0}
 --- !u!1 &2621529548483539907
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,26 +12,25 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private GameObject UIInv;
     private UIContainer container;
+    private bool isOpen = true;
+    private int money;
 
-    private bool isOpen = false;
+    public int Money { get => money; set => money = value; }
+    public bool IsOpen { get => isOpen; set => isOpen = value; }
 
     void Start()
     {
-
+        container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform)
+                    .GetComponent<UIContainer>();
+        Close();
     }
 
     /* Open UI inventory
      */
-    public void Open()
+    public void Open(ShopInventory shop = null)
     {
-
-        if (!container)
-            container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform).GetComponent<UIContainer>();
-        
-
         if (isOpen)
         {
-            Close();
             return;
         }
 
@@ -46,9 +45,14 @@ public class PlayerInventory : MonoBehaviour
      */
     public void Close()
     {
+        if (!isOpen)
+        {
+            return;
+        }
+
         isOpen = false;
-        if(container)
-            container.Close();
+        container.Close();
+
         UIButtonsManager.instance.ButtonUnactive("bag");
     }
 
@@ -78,4 +82,6 @@ public class PlayerInventory : MonoBehaviour
         if(isOpen)
             container.RefreshContainer(items);
     }
+
+
 }

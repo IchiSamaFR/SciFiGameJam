@@ -3,18 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UITest : MonoBehaviour
+public class UIOverCheck : MonoBehaviour
 {
     int UILayer;
 
     private void Start()
     {
         UILayer = LayerMask.NameToLayer("UI");
-    }
-
-    private void Update()
-    {
-        print(IsPointerOverUIElement() ? "Over UI" : "Not over UI");
     }
 
 
