@@ -34,6 +34,8 @@ public class UIShop : MonoBehaviour
         Open(null);
     }
 
+    /* Set of the shop inventory by ItemsStat and ItemAlready In
+     */
     void SetInv()
     {
         for (int i = 0; i < itemsInv.Count; i++)
@@ -45,7 +47,6 @@ public class UIShop : MonoBehaviour
                 itemsInv[i].Amount = wait.Amount;
             }
         }
-
 
         foreach (ShopItemStat item in itemsAble)
         {
@@ -67,6 +68,8 @@ public class UIShop : MonoBehaviour
         itemsInv.Sort((x, y) => x.Name.CompareTo(y.Name));
     }
 
+    /* Open UI Shop
+     */
     public void Open(PlayerInventory target)
     {
         if(container == null)
@@ -88,6 +91,8 @@ public class UIShop : MonoBehaviour
         container.RefreshContainer(itemsInv);
     }
 
+    /* Close UI Shop
+     */
     public void Close()
     {
         if (targetInv)
@@ -99,6 +104,8 @@ public class UIShop : MonoBehaviour
         container.Close();
     }
 
+    /* Add item in the shop inventory
+     */
     public void GetItem(Item item)
     {
         if (item.Amount == 0)

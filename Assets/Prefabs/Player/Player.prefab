@@ -5729,9 +5729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  UIInv: {fileID: 2558545356450311449}
-  UIitemInv: {fileID: 1281218657398298464, guid: c5834c8b13de6164dac1c52dc1bb5978, type: 3}
-  UIContentInv: {fileID: 5907326232327255278}
+  UIInv: {fileID: 2479370476462550722, guid: 5de91c629698fac4a94e48065615712d, type: 3}
 --- !u!114 &396722584722970198
 MonoBehaviour:
   m_ObjectHideFlags: 0

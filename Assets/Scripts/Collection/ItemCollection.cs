@@ -19,7 +19,8 @@ public class ItemCollection : MonoBehaviour
         instance = this;
     }
 
-
+    /* Return items by Type
+     */
     public List<Item> GetItemsType(string type)
     {
         List<Item> lst = new List<Item>();
@@ -32,6 +33,9 @@ public class ItemCollection : MonoBehaviour
         }
         return lst;
     }
+
+    /* Return item by Id
+     */
     public Item GetItem(string id)
     {
         foreach (Item item in itemList)
@@ -44,6 +48,8 @@ public class ItemCollection : MonoBehaviour
         return null;
     }
 
+    /* Return item Name by Id
+     */
     public string GetItemName(string id)
     {
         Item item = GetItem(id);
@@ -56,6 +62,9 @@ public class ItemCollection : MonoBehaviour
             return "";
         }
     }
+
+    /* Return item Sprite by Id
+     */
     public Sprite GetItemSprite(string id)
     {
         Item item = GetItem(id);
@@ -68,6 +77,9 @@ public class ItemCollection : MonoBehaviour
             return null;
         }
     }
+
+    /* Return ressource Prefab Name by Id
+     */
     public GameObject GetItemPrefab(string id)
     {
         Item item = GetItem(id);
@@ -80,6 +92,9 @@ public class ItemCollection : MonoBehaviour
             return null;
         }
     }
+
+    /* Return item Price by Id
+     */
     public int GetItemPrice(string id)
     {
         Item item = GetItem(id);

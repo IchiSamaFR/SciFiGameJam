@@ -11,43 +11,50 @@ public class PlayerInventory : MonoBehaviour
     [Header("UI Objects")]
     [SerializeField]
     private GameObject UIInv;
-    [SerializeField]
-    private GameObject UIitemInv;
-    [SerializeField]
-    private Transform UIContentInv;
+    private UIContainer container;
 
     private bool isOpen = false;
 
     void Start()
     {
-        Close();
+
     }
 
+    /* Open UI inventory
+     */
     public void Open()
     {
+
+        if (!container)
+            container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform).GetComponent<UIContainer>();
+        
+
         if (isOpen)
         {
             Close();
             return;
         }
         isOpen = true;
-        UIInv.SetActive(true);
 
-        RefreshInv();
+        container.Open();
+        container.RefreshContainer(items);
     }
 
+    /* Close UI inventory
+     */
     public void Close()
     {
         isOpen = false;
-        UIInv.SetActive(false);
+        if(container)
+            container.Close();
     }
 
+    /* Add item in inventory
+     */
     public void GetItem(Item item)
     {
         if (item.Amount == 0)
-        {
             return;
-        }
         
         foreach (Item _item in items)
         {
@@ -63,23 +70,9 @@ public class PlayerInventory : MonoBehaviour
         }
 
         if (item.Amount > 0)
-        {
             items.Add(item);
-        }
-        RefreshInv();
-    }
 
-    public void RefreshInv()
-    {
-        foreach (Transform item in UIContentInv)
-        {
-            Destroy(item.gameObject);
-        }
-
-        foreach (var item in items)
-        {
-            ItemInv slot = Instantiate(UIitemInv, UIContentInv).GetComponent<ItemInv>();
-            slot.Set(item);
-        }
+        if(isOpen)
+            container.RefreshContainer(items);
     }
 }
