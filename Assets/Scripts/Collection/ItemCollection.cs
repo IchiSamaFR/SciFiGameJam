@@ -43,6 +43,7 @@ public class ItemCollection : MonoBehaviour
         }
         return null;
     }
+
     public string GetItemName(string id)
     {
         Item item = GetItem(id);
@@ -77,6 +78,18 @@ public class ItemCollection : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+    public int GetItemPrice(string id)
+    {
+        Item item = GetItem(id);
+        if (item != null)
+        {
+            return item.Price;
+        }
+        else
+        {
+            return -1;
         }
     }
 }

@@ -12,7 +12,7 @@ public class PlayerStats : EntityStats
     [SerializeField]
     private float maxWidth = 500f;
 
-    float newDivider;
+    float newDivider = 1;
 
 
     [SerializeField]

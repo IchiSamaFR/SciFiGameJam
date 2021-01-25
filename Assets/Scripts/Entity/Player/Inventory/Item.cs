@@ -12,6 +12,7 @@ public class Item
     public Sprite Sprite;
     public int Amount;
     public int MaxAmount;
+    public int Price;
 
     public bool Full => Amount / MaxAmount == 1 ? true : false;
 

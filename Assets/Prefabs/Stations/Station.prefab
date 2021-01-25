@@ -159,6 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2621529548348088997}
   - component: {fileID: 2922799553622536890}
+  - component: {fileID: 8448765417906596537}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -199,6 +200,25 @@ MonoBehaviour:
   - {fileID: 2621529548202592576}
   - {fileID: 2621529549272122126}
   - {fileID: 2621529549995854649}
+--- !u!114 &8448765417906596537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621529548348088996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3ea60bf71b04f448d8128a7dde659e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInv: []
+  itemsAble:
+  - Id: ressource_iridium
+    Buy: 1
+    Sell: 1
+    PriceDiff: 10
+  UIInv: {fileID: 2479370476462550722, guid: 71cfbfc5f40f99947866772a931c5ece, type: 3}
 --- !u!1 &2621529548483539907
 GameObject:
   m_ObjectHideFlags: 0
