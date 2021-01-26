@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3ea60bf71b04f448d8128a7dde659e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 100
   itemsInv:
   - Id: ressource_iridium
     Name: 

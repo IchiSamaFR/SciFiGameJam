@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopInventory : MonoBehaviour
+public class ShopInventory : InventoryContainer
 {
     [System.Serializable]
     public struct ShopItemStat
@@ -10,15 +10,17 @@ public class ShopInventory : MonoBehaviour
         public string Id;
         public bool Buy;
         public bool Sell;
-        public float PriceDiff;
+        public int PriceDiff;
     }
 
     private PlayerInventory targetInv;
 
     [SerializeField]
-    List<Item> itemsInv = new List<Item>();
+    private int money = 100;
     [SerializeField]
-    List<ShopItemStat> itemsAble = new List<ShopItemStat>();
+    private List<Item> itemsInv = new List<Item>();
+    [SerializeField]
+    private List<ShopItemStat> itemsAble = new List<ShopItemStat>();
 
     [Header("UI Objects")]
     [SerializeField]
@@ -38,6 +40,7 @@ public class ShopInventory : MonoBehaviour
         Close();
     }
 
+    #region -- Open Close --
     /* Set of the shop inventory by ItemsStat and ItemAlready In
      */
     void SetInv()
@@ -82,22 +85,115 @@ public class ShopInventory : MonoBehaviour
         
         targetInv = target;
         targetInv.Open();
+        targetInv.SetShop(this);
 
         isOpen = true;
         UIButtonsManager.instance.ButtonActive("shop");
+
+
         container.Open();
-        container.RefreshContainer(itemsInv);
+        container.SetInventoryContainer(this);
+        RefreshUI();
+        RefreshMoney();
     }
 
     /* Close UI Shop
      */
     public void Close()
     {
-
         isOpen = false;
         UIButtonsManager.instance.ButtonUnactive("shop");
+
+        if (targetInv)
+        {
+            targetInv.ResetShop(this);
+            targetInv = null;
+        }
         container.Close();
     }
+    #endregion
+    
+    public override void ItemButtonAction(Item item, bool all)
+    {
+        int amount = 0;
+        if (all)
+            amount = item.Amount;
+        else
+            amount = 1;
+
+        Item toSend = new Item(item);
+
+        int costUnit = toSend.Price + (int)((float)toSend.Price * (float)GetPrice(item.Id) / 100);
+
+        int returned = targetInv.Buy(toSend, amount, costUnit, this);
+
+        RemoveItem(item, amount - returned);
+    }
+    
+    public int Buy(Item item, int amount, PlayerInventory inv)
+    {
+        int costUnit = item.Price + (int)((float)item.Price * (float)GetPrice(item.Id) / 100);
+        int canBuy = (int)(money / costUnit);
+        int rest = 0;
+
+        if (amount < canBuy)
+        {
+            item.Amount = amount;
+            GetItem(item);
+            PayMoney(amount * costUnit);
+            inv.GetMoney(amount * costUnit);
+
+            rest = 0;
+        }
+        else
+        {
+            item.Amount = canBuy;
+            GetItem(item);
+            PayMoney(canBuy * costUnit);
+            inv.GetMoney(canBuy * costUnit);
+
+            rest = amount - canBuy;
+        }
+
+
+        return rest;
+    }
+
+    #region -- Money --
+
+    private int GetPrice(string id)
+    {
+        foreach (var item in itemsAble)
+        {
+            if (item.Id == id)
+            {
+                return item.PriceDiff;
+            }
+        }
+        return 0;
+    }
+
+    public bool PayMoney(int amount)
+    {
+        if (amount <= money)
+        {
+            money -= amount;
+            RefreshMoney();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void GetMoney(int amount)
+    {
+        money += amount;
+        RefreshMoney();
+    }
+    #endregion
+
 
     /* Add item in the shop inventory
      */
@@ -122,15 +218,16 @@ public class ShopInventory : MonoBehaviour
             }
         }
 
-        if (itemCollection.ItemExist(item.Id) && item.Amount > 0)
+        if (item.Amount > 0)
         {
             itemsInv.Add(item);
         }
-        container.RefreshContainer(itemsInv);
+        RefreshUI();
     }
+
     /* Add item in the shop inventory
      */
-    public void RemoveItem(string id, int amount)
+    public void RemoveItem(Item item, int amount)
     {
         if (amount == 0)
         {
@@ -139,7 +236,7 @@ public class ShopInventory : MonoBehaviour
 
         foreach (Item _item in itemsInv)
         {
-            if (id == _item.Id)
+            if (item == _item)
             {
                 amount = _item.RemoveAmount(amount);
 
@@ -150,6 +247,19 @@ public class ShopInventory : MonoBehaviour
             }
         }
 
-        container.RefreshContainer(itemsInv);
+        RefreshUI();
+    }
+
+
+    private void RefreshUI()
+    {
+        if(isOpen)
+            container.RefreshContainer(itemsInv, true);
+    }
+
+
+    private void RefreshMoney()
+    {
+        container.RefreshMoney(money);
     }
 }

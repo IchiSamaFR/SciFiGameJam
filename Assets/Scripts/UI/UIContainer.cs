@@ -1,20 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIContainer : MonoBehaviour
 {
+    private InventoryContainer inventoryContainer;
     [SerializeField]
     private GameObject uiInv;
     [SerializeField]
     private GameObject uiItemInv;
     [SerializeField]
     private Transform uiContentInv;
+    [SerializeField]
+    private TextMeshProUGUI txtMoney;
 
     public GameObject UIInv { get => uiInv; set => uiInv = value; }
     public GameObject UIItemInv { get => uiItemInv; set => uiItemInv = value; }
     public Transform UIContentInv { get => uiContentInv; set => uiContentInv = value; }
 
+
+    public void SetInventoryContainer(InventoryContainer inventoryContainer)
+    {
+        this.inventoryContainer = inventoryContainer;
+    }
+
+    public void RefreshMoney(int amount)
+    {
+        txtMoney.text = amount + "c";
+    }
 
     public void RefreshContainer(List<Item> itemsInv, bool sellBuy = false)
     {
@@ -45,6 +59,7 @@ public class UIContainer : MonoBehaviour
                 if (get <= r)
                 {
                     ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
+                    slot.SetParent(this);
                     slot.Set(item, sellBuy);
                 }
                 r++;
@@ -62,17 +77,19 @@ public class UIContainer : MonoBehaviour
                 r++;
             }
         }
-
-
     }
 
     public void Open()
     {
         uiInv.SetActive(true);
     }
-
     public void Close()
     {
         uiInv.SetActive(false);
+    }
+
+    public void ItemButtonAction(Item item, bool all = false)
+    {
+        inventoryContainer.ItemButtonAction(item, all);
     }
 }
