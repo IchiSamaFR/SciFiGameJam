@@ -335,7 +335,7 @@ MonoBehaviour:
     Prefab: {fileID: 2682994161823816717, guid: 6e74fd5cb89946548b9c630bf8fefc1d, type: 3}
     Sprite: {fileID: 0}
     Amount: 0
-    MaxAmount: -1
+    MaxAmount: 6
     Price: 10
 --- !u!1 &113015798
 GameObject:

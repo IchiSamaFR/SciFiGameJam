@@ -16,18 +16,54 @@ public class UIContainer : MonoBehaviour
     public Transform UIContentInv { get => uiContentInv; set => uiContentInv = value; }
 
 
-    public void RefreshContainer(List<Item> itemsInv)
+    public void RefreshContainer(List<Item> itemsInv, bool sellBuy = false)
     {
-        foreach (Transform item in UIContentInv)
+
+        int toGet = itemsInv.Count;
+        int get = 0;
+
+        /* Replace data from all slot already create
+         */
+        foreach (Transform item in uiContentInv)
         {
-            Destroy(item.gameObject);
+            if(get < toGet)
+            {
+                item.GetComponent<ItemInv>().Set(itemsInv[get], sellBuy);
+                get++;
+            }
+            else
+            {
+                break;
+            }
         }
 
-        foreach (var item in itemsInv)
+        if(get < toGet)
         {
-            ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
-            slot.Set(item);
+            int r = 0;
+            foreach (var item in itemsInv)
+            {
+                if (get <= r)
+                {
+                    ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
+                    slot.Set(item, sellBuy);
+                }
+                r++;
+            }
         }
+        else if (get >= toGet)
+        {
+            int r = 0;
+            foreach (Transform item in UIContentInv)
+            {
+                if (toGet <= r)
+                {
+                    Destroy(item.gameObject);
+                }
+                r++;
+            }
+        }
+
+
     }
 
     public void Open()

@@ -14,6 +14,7 @@ public class PlayerInventory : MonoBehaviour
     private UIContainer container;
     private bool isOpen = true;
     private int money;
+    private ShopInventory shopInventory;
 
     public int Money { get => money; set => money = value; }
     public bool IsOpen { get => isOpen; set => isOpen = value; }
@@ -23,6 +24,13 @@ public class PlayerInventory : MonoBehaviour
         container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform)
                     .GetComponent<UIContainer>();
         Close();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown("w"))
+        {
+            RemoveItem("ressource_iridium", 10);
+        }
     }
 
     /* Open UI inventory
@@ -85,4 +93,42 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
+    /* Add item in the shop inventory
+     */
+    public void RemoveItem(string id, int amount)
+    {
+        if (amount == 0)
+        {
+            return;
+        }
+
+        
+        List<Item> toDelete = new List<Item>();
+        int ind = 0;
+        for (int i = items.Count - 1; i >= 0; i--)
+        {
+            Item _item = items[i];
+            if (id == _item.Id)
+            {
+                amount = _item.RemoveAmount(amount);
+
+                if (amount >= 0)
+                {
+                    toDelete.Add(_item);
+                }
+                if (amount == -1)
+                {
+                    break;
+                }
+            }
+            ind++;
+        }
+
+        for (int i = 0; i < toDelete.Count; i++)
+        {
+            items.Remove(toDelete[i]);
+        }
+
+        container.RefreshContainer(items);
+    }
 }

@@ -53,4 +53,19 @@ public class Item
 
         return 0;
     }
+    public int ForceAddAmount(int amount)
+    {
+        Amount += amount;
+
+        return 0;
+    }
+    public int RemoveAmount(int amount)
+    {
+        Amount -= amount;
+        if (Amount <= 0)
+        {
+            return -Amount;
+        }
+        return -1;
+    }
 }

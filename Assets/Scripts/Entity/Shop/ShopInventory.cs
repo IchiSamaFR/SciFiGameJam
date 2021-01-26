@@ -112,7 +112,8 @@ public class ShopInventory : MonoBehaviour
         {
             if (item.Id == _item.Id)
             {
-                item.Amount = _item.AddAmount(item.Amount);
+                // Force add amount
+                item.Amount = _item.ForceAddAmount(item.Amount);
 
                 if (item.Amount == 0)
                 {
@@ -125,6 +126,30 @@ public class ShopInventory : MonoBehaviour
         {
             itemsInv.Add(item);
         }
+        container.RefreshContainer(itemsInv);
+    }
+    /* Add item in the shop inventory
+     */
+    public void RemoveItem(string id, int amount)
+    {
+        if (amount == 0)
+        {
+            return;
+        }
+
+        foreach (Item _item in itemsInv)
+        {
+            if (id == _item.Id)
+            {
+                amount = _item.RemoveAmount(amount);
+
+                if (amount == -1)
+                {
+                    break;
+                }
+            }
+        }
+
         container.RefreshContainer(itemsInv);
     }
 }
