@@ -18,7 +18,8 @@ public class PlayerManager : MonoBehaviour
     
     UIOverCheck overCheck;
 
-    public List<Turret> turrets = new List<Turret>();
+    [SerializeField]
+    List<Turret> turrets = new List<Turret>();
 
     void Start()
     {
@@ -33,7 +34,6 @@ public class PlayerManager : MonoBehaviour
             .SetPlayer(playerInventory);
         UIButtonsManager.instance.GetButton("bag").GetComponent<UIBtnInventory>()
             .SetPlayer(playerInventory);
-
     }
 
     private void Update()

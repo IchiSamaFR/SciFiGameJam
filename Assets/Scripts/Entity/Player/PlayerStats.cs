@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerStats : EntityStats
 {
+    [Header("GUI Health Shield")]
     [SerializeField]
     private float pixelPerCent = 34f;
     [SerializeField]

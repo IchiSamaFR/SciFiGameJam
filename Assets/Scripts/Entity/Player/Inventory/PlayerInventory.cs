@@ -231,11 +231,11 @@ public class PlayerInventory : InventoryContainer
         {
             if (shopInventory)
             {
-                container.RefreshContainer(items, true);
+                container.RefreshContainer(items, true, shopInventory.ItemsAble);
             }
             else
             {
-                container.RefreshContainer(items, false);
+                container.RefreshContainer(items);
             }
         }
     }

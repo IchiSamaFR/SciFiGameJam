@@ -274,8 +274,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 882b5f0b65064c444a57aa5698932fcd, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 833bd45acd5df534ca1470d29fc81885, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -773,6 +773,7 @@ MonoBehaviour:
   uiItemInv: {fileID: 1281218657398298464, guid: cf7ac7e8ad5a5f84c9b2e6b237a9bc60, type: 3}
   uiContentInv: {fileID: 2479370476165070323}
   txtMoney: {fileID: 6878610090031570401}
+  prebaStatsPanel: {fileID: 6580748300391417567, guid: e579bd8cf44127845b4b56200683e63d, type: 3}
 --- !u!1 &2479370476860066967
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +849,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 15}
-  m_SizeDelta: {x: 300, y: 80}
+  m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8930379095712628683
 CanvasRenderer:
@@ -878,7 +879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3b7faaafc3513e94a909e9c434e2c4bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e06c83a9161fa3644a2bb67acb5f855d, type: 3}
   m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1

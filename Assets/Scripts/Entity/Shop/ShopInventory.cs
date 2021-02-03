@@ -31,6 +31,7 @@ public class ShopInventory : InventoryContainer
 
     private ItemCollection itemCollection { get => ItemCollection.instance; }
     public bool IsOpen { get => isOpen; set => isOpen = value; }
+    public List<ShopItemStat> ItemsAble { get => itemsAble; set => itemsAble = value; }
 
     void Start()
     {
@@ -161,7 +162,7 @@ public class ShopInventory : InventoryContainer
 
     #region -- Money --
 
-    private int GetPrice(string id)
+    public int GetPrice(string id)
     {
         foreach (var item in itemsAble)
         {
@@ -254,7 +255,7 @@ public class ShopInventory : InventoryContainer
     private void RefreshUI()
     {
         if(isOpen)
-            container.RefreshContainer(itemsInv, true);
+            container.RefreshContainer(itemsInv, true, itemsAble);
     }
 
 

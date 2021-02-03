@@ -15,6 +15,11 @@ public class UIContainer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtMoney;
 
+    [SerializeField]
+    private GameObject prebaStatsPanel;
+
+    private GameObject statsPanel;
+
     public GameObject UIInv { get => uiInv; set => uiInv = value; }
     public GameObject UIItemInv { get => uiItemInv; set => uiItemInv = value; }
     public Transform UIContentInv { get => uiContentInv; set => uiContentInv = value; }
@@ -29,8 +34,7 @@ public class UIContainer : MonoBehaviour
     {
         txtMoney.text = amount + "c";
     }
-
-    public void RefreshContainer(List<Item> itemsInv, bool sellBuy = false)
+    public void RefreshContainer(List<Item> itemsInv, bool sellBuy = false, List<ShopInventory.ShopItemStat> shopItemStats = null)
     {
 
         int toGet = itemsInv.Count;
@@ -42,7 +46,21 @@ public class UIContainer : MonoBehaviour
         {
             if(get < toGet)
             {
-                item.GetComponent<ItemInv>().Set(itemsInv[get], sellBuy);
+                int price = 0;
+                if (shopItemStats != null)
+                {
+                    foreach (var itemStat in shopItemStats)
+                    {
+                        if (itemStat.Id == itemsInv[get].Id)
+                        {
+                            price = itemsInv[get].Price +
+                                    (int)((float)itemsInv[get].Price * (float)itemStat.PriceDiff / 100);
+                            break;
+                        }
+                    }
+                }
+
+                item.GetComponent<ItemInv>().Set(itemsInv[get], prebaStatsPanel, sellBuy, price);
                 get++;
             }
             else
@@ -58,9 +76,23 @@ public class UIContainer : MonoBehaviour
             {
                 if (get <= r)
                 {
+                    int price = 0;
+                    if (shopItemStats != null)
+                    {
+                        foreach (var itemStat in shopItemStats)
+                        {
+                            if (itemStat.Id == itemsInv[r].Id)
+                            {
+                                price = itemsInv[r].Price +
+                                        (int)((float)itemsInv[r].Price * (float)itemStat.PriceDiff / 100);
+                                break;
+                            }
+                        }
+                    }
+
                     ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
                     slot.SetParent(this);
-                    slot.Set(item, sellBuy);
+                    slot.Set(item, prebaStatsPanel, sellBuy, price);
                 }
                 r++;
             }
@@ -86,10 +118,23 @@ public class UIContainer : MonoBehaviour
     public void Close()
     {
         uiInv.SetActive(false);
+        if (statsPanel)
+        {
+            Destroy(statsPanel);
+        }
     }
 
     public void ItemButtonAction(Item item, bool all = false)
     {
         inventoryContainer.ItemButtonAction(item, all);
+    }
+
+    public void SetItemStatsOpen(GameObject newStatsPanel)
+    {
+        if (statsPanel)
+        {
+            Destroy(statsPanel);
+        }
+        statsPanel = newStatsPanel;
     }
 }
