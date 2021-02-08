@@ -10,6 +10,8 @@ public class EntityStats : MonoBehaviour
     #region -- Assign variable --
     [Header("Stats Instantiate")]
     [SerializeField]
+    private string faction;
+    [SerializeField]
     private int maxHealth = 10;
     private int maxHealthInit;
     [SerializeField]
@@ -20,6 +22,11 @@ public class EntityStats : MonoBehaviour
     private int maxShieldInit;
     [SerializeField]
     private int actualShield;
+    [SerializeField]
+    private int shieldRegen;
+    [SerializeField]
+    private float shieldRegenTime = 10;
+    private float nextRegen;
 
     [SerializeField]
     private float maxSpeed;
@@ -52,6 +59,8 @@ public class EntityStats : MonoBehaviour
 
 
     #region -- Assign Getter Setter --
+    public string Faction { get => faction; set => faction = value; }
+
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public int MaxHealthInit { get => maxHealthInit; set => maxHealthInit = value; }
     public int ActualHealth { get => actualHealth; set => actualHealth = value; }
@@ -111,7 +120,9 @@ public class EntityStats : MonoBehaviour
             actualHealth -= amount;
         }
 
-        if(actualHealth < 0)
+        nextRegen = shieldRegenTime;
+
+        if (actualHealth < 0)
         {
             actualHealth = 0;
         }
@@ -149,6 +160,19 @@ public class EntityStats : MonoBehaviour
         if (actualShield > maxShield)
         {
             actualShield = maxShield;
+        }
+    }
+
+    public virtual void CheckRegen()
+    {
+        if(nextRegen < 0)
+        {
+            GetShield(shieldRegen);
+            nextRegen += 1;
+        }
+        else
+        {
+            nextRegen -= Time.deltaTime;
         }
     }
 }

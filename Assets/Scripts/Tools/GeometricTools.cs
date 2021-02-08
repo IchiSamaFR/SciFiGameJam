@@ -124,4 +124,14 @@ public static class GeometricTools
         }
         return 0;
     }
+
+    public static Vector2 GetSidesByAngleHypot(float angle, float length)
+    {
+        Vector2 toReturn = new Vector2();
+
+        toReturn.x = length * Mathf.Cos(angle * Mathf.Deg2Rad);
+        toReturn.y = length * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+        return toReturn;
+    }
 }

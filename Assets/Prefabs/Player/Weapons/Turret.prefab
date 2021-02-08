@@ -51,10 +51,11 @@ MonoBehaviour:
   rotationSpeed: 2.5
   aimTarget: 0
   target: {fileID: 0}
+  aiManager: {fileID: 0}
   playerManager: {fileID: 0}
   laserPref: {fileID: 6998032964351009620, guid: ef8c60ae3d7b10e488da197bd36d13a9, type: 3}
   laserMuzzles: []
-  errorRotation: 2
+  errorRotation: 0
 --- !u!1001 &383386857520240421
 PrefabInstance:
   m_ObjectHideFlags: 0

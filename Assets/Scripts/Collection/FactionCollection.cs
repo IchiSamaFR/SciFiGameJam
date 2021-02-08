@@ -32,14 +32,15 @@ public class FactionCollection : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    public float GetRelation(string id, string idOther)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (FactionRelation item in factionsRelations)
+        {
+            if((item.id == id && item.idOther == idOther) || (item.id == idOther && item.idOther == id))
+            {
+                return item.relation;
+            }
+        }
+        return 0;
     }
 }

@@ -12,9 +12,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerManager playerManager;
     Quaternion rotationToGetEuler = new Quaternion();
     Rigidbody rb;
-
-    [SerializeField]
-    private ParticleSystem[] thruster;
+    
+    private List<ParticleSystem> thrusters = new List<ParticleSystem>();
 
     public float actualSpeed { get => playerManager.playerStats.ActualSpeed; }
 
@@ -30,12 +29,26 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerManager = GetComponent<PlayerManager>();
+        SetModelManager();
     }
 
     void Update()
     {
         UpdateRotation();
         UpdateMovement();
+    }
+
+    void SetModelManager()
+    {
+        thrusters = new List<ParticleSystem>();
+
+        foreach (Transform item in playerManager.modelManager.ThrustersContent)
+        {
+            if (item.GetChild(0))
+            {
+                thrusters.Add(item.GetChild(0).GetComponent<ParticleSystem>());
+            }
+        }
     }
 
     /*
@@ -80,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(_forceToAdd);
         }
 
-        foreach (var item in thruster)
+        foreach (var item in thrusters)
         {
             float burst = (0.01f / (actualSpeed / maxSpeed));
             if(burst > 3)

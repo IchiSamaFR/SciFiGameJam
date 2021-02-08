@@ -23,7 +23,7 @@ public class Ressource : MonoBehaviour
     {
         if (item == null)
         {
-            if (ItemCollection.instance)
+            if (ItemCollection.instance && itemId != "credits")
             {
                 item = ItemCollection.instance.GetItem(itemId);
                 item.AddAmount(amount);

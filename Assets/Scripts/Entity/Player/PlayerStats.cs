@@ -35,10 +35,7 @@ public class PlayerStats : EntityStats
     
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            GetDamage(2);
-        }
+        CheckRegen();
     }
 
     public override void GetDamage(int amount)

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28939d46d1a29c049b08dc1b8f2d41ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 
   maxHealth: 10
   actualHealth: 0
   maxShield: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   getDestroyedEffects: {fileID: 3582264401440393527, guid: 5760ea0111a49ad49bfe23a75d2f46cc, type: 3}
   ressourcesToDrop:
   - id: ressource_iridium
-    amount: 220
+    amount: 310
 --- !u!54 &-1273326938650530613
 Rigidbody:
   m_ObjectHideFlags: 0

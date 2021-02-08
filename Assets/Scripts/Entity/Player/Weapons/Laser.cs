@@ -7,8 +7,9 @@ public class Laser : MonoBehaviour
     private int damage;
     private float speed;
     private float range;
+    private string faction;
 
-    public void Set(int damage, float speed, float range)
+    public void Set(int damage, float speed, float range, string faction = "player")
     {
         this.damage = damage;
         this.speed = speed;
@@ -24,11 +25,10 @@ public class Laser : MonoBehaviour
     {
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, speed * Time.deltaTime)
-            && hit.transform.tag != "Player")
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, speed * Time.deltaTime))
         {
             EntityStats _entity = hit.transform.GetComponent<EntityStats>();
-            if (_entity != null)
+            if (_entity != null && _entity.Faction != faction)
             {
                 _entity.GetDamage(damage);
             }

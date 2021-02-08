@@ -15,19 +15,25 @@ public class PlayerManager : MonoBehaviour
     public PlayerCamera playerCamera;
     public PlayerStats playerStats;
     public PlayerInventory playerInventory;
+
+    public ModelManager modelManager;
     
     UIOverCheck overCheck;
 
-    [SerializeField]
-    List<Turret> turrets = new List<Turret>();
-
-    void Start()
+    private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerCamera = GetComponent<PlayerCamera>();
         playerStats = GetComponent<PlayerStats>();
         playerInventory = GetComponent<PlayerInventory>();
         overCheck = GetComponent<UIOverCheck>();
+
+        modelManager = transform.GetChild(0).GetComponent<ModelManager>();
+    }
+
+    void Start()
+    {
+        modelManager.ImageSelected.gameObject.SetActive(false);
 
         UIButtonsManager.instance.ButtonNotInteractable("shop");
         UIButtonsManager.instance.GetButton("shop").GetComponent<UIBtnShop>()
@@ -45,9 +51,12 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && !overCheck.IsPointerOverUIElement())
         {
-            foreach (Turret item in turrets)
+            foreach (Transform item in modelManager.TurretsContent)
             {
-                item.Fire();
+                if(item.GetChild(0) != null)
+                {
+                    item.GetChild(0).GetComponent<Turret>().Fire();
+                }
             }
         }
         if (Input.GetKeyDown(invKey))

@@ -116,6 +116,8 @@ public class ItemInv : MonoBehaviour
             stats += item.Price;
             stats += "\n";
         }
+        print(item.Description);
+        stats += "\n" + item.Description;
 
         return stats;
     }
