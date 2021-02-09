@@ -39,6 +39,8 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private List<Transform> laserMuzzles = new List<Transform>();
     private int indMuzzle = 0;
+    [SerializeField]
+    private AudioClip laserAudio;
 
     [Header("Counter errors")]
 
@@ -127,6 +129,9 @@ public class Turret : MonoBehaviour
             laser.transform.rotation = Quaternion.Euler(5, transform.rotation.eulerAngles.y, 0);
 
             timerFireRate = 1 / fireRate;
+            GameObject obj = Instantiate(PrefabCollection.instance.GetPrefab("fxAudio"));
+            obj.transform.position = transform.position;
+            obj.GetComponent<FXAudio>().Set(AudioCollection.instance.GetAudio("laser"));
         }
 
     }

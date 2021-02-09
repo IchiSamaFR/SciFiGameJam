@@ -88,7 +88,7 @@ public class EntityStats : MonoBehaviour
     public GameObject GetDestroyedEffects { get => getDestroyedEffects; set => getDestroyedEffects = value; }
     #endregion
 
-    public void Init()
+    public virtual void Init()
     {
         rb = GetComponent<Rigidbody>();
 

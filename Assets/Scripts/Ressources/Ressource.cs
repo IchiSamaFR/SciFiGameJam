@@ -11,15 +11,10 @@ public class Ressource : MonoBehaviour
     private Item item;
 
     public Item Item { get => item; set => item = value; }
+    public string ItemId { get => itemId; set => itemId = value; }
+    public int Amount { get => amount; set => amount = value; }
 
-    public Ressource()
-    {
-        if (ItemCollection.instance)
-        {
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
+    public void Init()
     {
         if (item == null)
         {
@@ -33,12 +28,21 @@ public class Ressource : MonoBehaviour
                 return;
             }
         }
+    }
 
-        if(other.tag == "Player")
+    private void OnTriggerEnter(Collider other)
+    {
+        Init();
+
+        if (other.tag == "Player")
         {
             other.GetComponent<CollisionRedirect>().parent.GetComponent<PlayerInventory>().GetItem(item);
+            
+            GameObject obj = Instantiate(PrefabCollection.instance.GetPrefab("fxAudio"));
+            obj.transform.position = transform.position;
+            obj.GetComponent<FXAudio>().Set(AudioCollection.instance.GetAudio("pickup"));
+
             Destroy(gameObject);
-            //print(item.Name + " : " + item.Amount + "/" + item.MaxAmount);
         }
     }
 }

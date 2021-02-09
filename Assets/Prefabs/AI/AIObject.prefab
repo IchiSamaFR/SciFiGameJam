@@ -65,9 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: pirates
-  maxHealth: 10
+  maxHealth: 15
   actualHealth: 0
-  maxShield: 3
+  maxShield: 10
   actualShield: 0
   shieldRegen: 2
   shieldRegenTime: 20
@@ -78,6 +78,15 @@ MonoBehaviour:
   errorBrake: 0.02
   errorRotation: 2
   getDestroyedEffects: {fileID: 0}
+  rangeAttack: 7
+  rangeDetection: 12
+  rangeCollider: {fileID: 0}
+  dmg: 1
+  fireRate: 1
+  drop: 1
+  ressourcesToDrop:
+  - id: credits
+    amount: 200
 --- !u!114 &7596898845093329126
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -119,7 +119,6 @@ public class AIMovement : MonoBehaviour
                 || Physics.Raycast(transform.position, transform.TransformDirection(endPos2), out hit, dist)
                 || Physics.Raycast(transform.position, transform.TransformDirection(endPos3), out hit, dist))
             {
-                print("Right");
                 return true;
             }
             else

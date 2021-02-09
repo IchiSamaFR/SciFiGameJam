@@ -55,6 +55,7 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   laserPref: {fileID: 6998032964351009620, guid: ef8c60ae3d7b10e488da197bd36d13a9, type: 3}
   laserMuzzles: []
+  laserAudio: {fileID: 8300000, guid: 799ef9a621ef2644693599acaf737730, type: 3}
   errorRotation: 0
 --- !u!1001 &383386857520240421
 PrefabInstance:

@@ -27,6 +27,12 @@ public class Asteroid : EntityStats
     {
         base.GetDestroyed();
         CreateDrop();
+
+
+        GameObject obj = Instantiate(PrefabCollection.instance.GetPrefab("fxAudio"));
+        obj.transform.position = transform.position;
+        obj.GetComponent<FXAudio>().Set(AudioCollection.instance.GetAudio("asteroid_explosion"));
+
         Destroy(gameObject);
     }
 

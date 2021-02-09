@@ -37,7 +37,7 @@ public class AIManager : MonoBehaviour
         {
             if (item.GetChild(0) != null)
             {
-                item.GetChild(0).GetComponent<Turret>().SetStats(1, 1, 12, 20);
+                item.GetChild(0).GetComponent<Turret>().SetStats(aiStats.Dmg, aiStats.FireRate, 12, 20);
             }
         }
     }
@@ -50,17 +50,21 @@ public class AIManager : MonoBehaviour
 
     void CheckFire()
     {
+        if (!target)
+        {
+            return;
+        }
         float distBetween = GetHypot(new Vector2(transform.position.x - target.transform.position.x,
                                                  transform.position.z - target.transform.position.z));
 
-        if(distBetween < 6)
+        if(distBetween < aiStats.RangeAttack)
         {
             foreach (Transform item in modelManager.TurretsContent)
             {
                 if (item.GetChild(0) != null)
                 {
                     int x = Random.Range(0, 2);
-                    int rand = Random.Range(5, 10);
+                    int rand = Random.Range(2, 6);
 
                     if(x == 0)
                     {
@@ -88,10 +92,19 @@ public class AIManager : MonoBehaviour
     {
         if (!target)
         {
-            EntityStats entity = other.GetComponent<EntityStats>();
-            if (entity != null && FactionCollection.instance.GetRelation(entity.Faction, aiStats.Faction) < 0)
+            CollisionRedirect col = other.GetComponent<CollisionRedirect>();
+            if (!col)
             {
-                target = entity.transform;
+                return;
+            }
+
+            EntityStats entity = col.parent.GetComponent<EntityStats>();
+            if (entity != null)
+            {
+                if (FactionCollection.instance.GetRelation(entity.Faction, aiStats.Faction) < 0)
+                {
+                    target = entity.transform;
+                }
             }
         }
     }

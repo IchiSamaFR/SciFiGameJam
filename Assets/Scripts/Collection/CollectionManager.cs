@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ItemCollection))]
+[RequireComponent(typeof(FactionCollection))]
+[RequireComponent(typeof(PrefabCollection))]
+[RequireComponent(typeof(AudioCollection))]
 public class CollectionManager : MonoBehaviour
 {
     public static CollectionManager instance;

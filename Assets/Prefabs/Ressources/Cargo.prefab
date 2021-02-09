@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2290140417832380178}
   - component: {fileID: 2290140417832380179}
-  - component: {fileID: -921758813967720807}
+  - component: {fileID: -6271756716084650167}
   - component: {fileID: 3845206627274275591}
   - component: {fileID: 3412397218416499579}
   m_Layer: 0
@@ -54,7 +54,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-921758813967720807
+--- !u!114 &-6271756716084650167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c99a1e0db690ce488f6aadd05a5701e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemId: 
   amount: 200
 --- !u!135 &3845206627274275591
 SphereCollider:
