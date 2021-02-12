@@ -46,21 +46,28 @@ public class UIContainer : MonoBehaviour
         {
             if(get < toGet)
             {
-                int price = 0;
-                if (shopItemStats != null)
+                if (sellBuy)
                 {
-                    foreach (var itemStat in shopItemStats)
+                    int price = 0;
+                    if (shopItemStats != null)
                     {
-                        if (itemStat.Id == itemsInv[get].Id)
+                        foreach (var itemStat in shopItemStats)
                         {
-                            price = itemsInv[get].Price +
-                                    (int)((float)itemsInv[get].Price * (float)itemStat.PriceDiff / 100);
-                            break;
+                            if (itemStat.Id == itemsInv[get].Id)
+                            {
+                                price = itemsInv[get].Price +
+                                        (int)((float)itemsInv[get].Price * (float)itemStat.PriceDiff / 100);
+                                break;
+                            }
                         }
                     }
-                }
 
-                item.GetComponent<ItemInv>().Set(itemsInv[get], prebaStatsPanel, sellBuy, price);
+                    item.GetComponent<ItemInv>().Set(itemsInv[get], prebaStatsPanel, sellBuy, price);
+                }
+                else
+                {
+                    item.GetComponent<ItemInv>().Set(itemsInv[get], prebaStatsPanel);
+                }
                 get++;
             }
             else
@@ -76,23 +83,32 @@ public class UIContainer : MonoBehaviour
             {
                 if (get <= r)
                 {
-                    int price = 0;
-                    if (shopItemStats != null)
+                    if (sellBuy)
                     {
-                        foreach (var itemStat in shopItemStats)
+                        int price = 0;
+                        if (shopItemStats != null)
                         {
-                            if (itemStat.Id == itemsInv[r].Id)
+                            foreach (var itemStat in shopItemStats)
                             {
-                                price = itemsInv[r].Price +
-                                        (int)((float)itemsInv[r].Price * (float)itemStat.PriceDiff / 100);
-                                break;
+                                if (itemStat.Id == itemsInv[r].Id)
+                                {
+                                    price = itemsInv[r].Price +
+                                            (int)((float)itemsInv[r].Price * (float)itemStat.PriceDiff / 100);
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
-                    slot.SetParent(this);
-                    slot.Set(item, prebaStatsPanel, sellBuy, price);
+                        ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
+                        slot.SetParent(this);
+                        slot.Set(item, prebaStatsPanel, sellBuy, price);
+                    }
+                    else
+                    {
+                        ItemInv slot = Instantiate(UIItemInv, UIContentInv).GetComponent<ItemInv>();
+                        slot.SetParent(this);
+                        slot.Set(item, prebaStatsPanel);
+                    }
                 }
                 r++;
             }

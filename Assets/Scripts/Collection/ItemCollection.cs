@@ -6,7 +6,7 @@ public class ItemCollection : MonoBehaviour
 {
     public static ItemCollection instance;
 
-    public List<Item> SpecialItemList = new List<Item>();
+    public List<TurretItem> turretsItemList = new List<TurretItem>();
     public List<Item> itemList = new List<Item>();
 
     private void Awake()
@@ -43,6 +43,26 @@ public class ItemCollection : MonoBehaviour
             if(item.Id == id)
             {
                 return new Item(item);
+            }
+        }
+        foreach (Item item in turretsItemList)
+        {
+            if (item.Id == id)
+            {
+                return new Item(item);
+            }
+        }
+        return null;
+    }
+    /* Return item by Id
+     */
+    public TurretItem GetTurretItem(string id)
+    {
+        foreach (TurretItem item in turretsItemList)
+        {
+            if (item.Id == id)
+            {
+                return new TurretItem(item);
             }
         }
         return null;
@@ -85,7 +105,7 @@ public class ItemCollection : MonoBehaviour
         Item item = GetItem(id);
         if (item != null)
         {
-            return item.Prefab;
+            return item.DropPrefab;
         }
         else
         {

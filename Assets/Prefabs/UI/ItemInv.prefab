@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIname: {fileID: 7569968653239064329}
   UIamount: {fileID: 2987215109408606533}
-  UIsellBuy: {fileID: 8008241543741669889}
+  UIaction: {fileID: 8008241543741669889}
 --- !u!114 &8465927125823442315
 MonoBehaviour:
   m_ObjectHideFlags: 0

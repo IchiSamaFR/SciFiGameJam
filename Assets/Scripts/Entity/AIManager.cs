@@ -32,6 +32,7 @@ public class AIManager : MonoBehaviour
     private void Start()
     {
         modelManager.ImageSelected.gameObject.SetActive(true);
+        modelManager.SetTurrets("turret_mk10");
 
         foreach (Transform item in modelManager.TurretsContent)
         {
@@ -52,8 +53,16 @@ public class AIManager : MonoBehaviour
     {
         if (!target)
         {
+            foreach (Transform item in modelManager.TurretsContent)
+            {
+                if (item.GetChild(0) != null)
+                {
+                    item.GetChild(0).GetComponent<Turret>().SetTarget(null);
+                }
+            }
             return;
         }
+
         float distBetween = GetHypot(new Vector2(transform.position.x - target.transform.position.x,
                                                  transform.position.z - target.transform.position.z));
 
@@ -70,8 +79,6 @@ public class AIManager : MonoBehaviour
                     {
                         rand = -rand;
                     }
-
-                    item.GetChild(0).GetComponent<Turret>().SetTarget(target, rand);
                     item.GetChild(0).GetComponent<Turret>().Fire();
                 }
             }
@@ -82,7 +89,7 @@ public class AIManager : MonoBehaviour
             {
                 if (item.GetChild(0) != null)
                 {
-                    item.GetChild(0).GetComponent<Turret>().SetTarget(null);
+                    item.GetChild(0).GetComponent<Turret>().SetTarget(target);
                 }
             }
         }

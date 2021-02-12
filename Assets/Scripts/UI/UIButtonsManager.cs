@@ -29,7 +29,7 @@ public class UIButtonsManager : MonoBehaviour
     {
         instance = this;
     }
-    
+
     /* Change sprite if opened or not
      */
     public void ButtonActive(string name)

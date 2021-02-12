@@ -30,6 +30,13 @@ public class Ressource : MonoBehaviour
         }
     }
 
+    public void Set(Item item)
+    {
+        this.item = item;
+        itemId = item.Id;
+        amount = item.Amount;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Init();

@@ -48,7 +48,7 @@ public class ShopInventory : InventoryContainer
     {
         for (int i = 0; i < itemsInv.Count; i++)
         {
-            if (itemsInv[i].Name == "" || itemsInv[i].Type == "" || itemsInv[i].Prefab == null)
+            if (itemsInv[i].Name == "" || itemsInv[i].Type == "" || itemsInv[i].DropPrefab == null)
             {
                 Item wait = itemsInv[i];
                 itemsInv[i] = itemCollection.GetItem(itemsInv[i].Id);

@@ -28,6 +28,8 @@ public class Turret : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    private string id;
+
 
     [Header("Objects")]
     [SerializeField]
@@ -46,9 +48,13 @@ public class Turret : MonoBehaviour
 
     [SerializeField]
     private float errorRotation = 0f;
-    
+
+
+    public string Id { get => id; set => id = value; }
+
     void Update()
     {
+        timerFireRate -= Time.deltaTime;
         AimTarget();
     }
 
@@ -68,10 +74,18 @@ public class Turret : MonoBehaviour
         this.fireSpeed = fireSpeed;
         this.range = range;
     }
-
+    public void SetStats(TurretItem turretItem)
+    {
+        this.damage = turretItem.Damage;
+        this.fireRate = turretItem.FireRate;
+        this.fireSpeed = turretItem.FireSpeed;
+        this.range = turretItem.Range;
+        this.Id = turretItem.Id;
+    }
 
     public void SetTarget(Transform target, float errorRotation = 0)
     {
+        this.aimTarget = true;
         this.target = target;
         this.errorRotation = errorRotation;
     }
@@ -103,8 +117,6 @@ public class Turret : MonoBehaviour
     {
         if (timerFireRate > 0)
         {
-
-            timerFireRate -= Time.deltaTime;
             return;
         }
         else

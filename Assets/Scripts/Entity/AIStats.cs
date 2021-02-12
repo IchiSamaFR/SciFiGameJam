@@ -88,7 +88,7 @@ public class AIStats : EntityStats
                     return;
                 }
 
-                GameObject _obj = Instantiate(_item.Prefab);
+                GameObject _obj = Instantiate(_item.DropPrefab);
                 _obj.GetComponent<Ressource>().Item = _item;
                 amount = _obj.GetComponent<Ressource>().Item.AddAmount(amount);
                 _obj.transform.position = new Vector3(Random.Range(pos.x - 0.5f, pos.x + 0.5f),

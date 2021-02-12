@@ -10,3 +10,7 @@ https://free-game-assets.itch.io/free-space-shooter-game-user-interface
 Font :
 https://www.1001fonts.com/tycho-font.html
 https://www.1001fonts.com/nasalization-free-font.html
+
+Sounds :
+BFXR
+https://freesound.org/people/furbyguy/sounds/331878/

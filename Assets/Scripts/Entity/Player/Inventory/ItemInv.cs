@@ -15,9 +15,9 @@ public class ItemInv : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI UIamount;
     [SerializeField]
-    private GameObject UIsellBuy;
+    private GameObject UIaction;
     private bool statsOpen = false;
-    private bool isSellBuy = false;
+    private bool isAction = false;
 
     Vector2 baseSize = new Vector2();
     Vector2 statsSize = new Vector2();
@@ -40,24 +40,43 @@ public class ItemInv : MonoBehaviour
         UIamount.text = "x" + item.Amount;
         prebaStatsPanel = statsPanelType;
 
-        UIsellBuy.SetActive(false);
-        isSellBuy = false;
+        if (UIaction)
+        {
+            UIaction.SetActive(false);
+        }
+        isAction = false;
     }
 
-    public void Set(Item item, GameObject statsPanelType, bool sellBuy, int price)
+    public void Set(Item item, GameObject statsPanelType, bool actionAble)
     {
         Set(item, statsPanelType);
 
-        if (sellBuy)
+        if (actionAble)
         {
-            UIsellBuy.SetActive(true);
-            isSellBuy = true;
+            UIaction.SetActive(true);
+            isAction = true;
+        }
+        else
+        {
+            UIaction.SetActive(false);
+            isAction = false;
+        }
+    }
+
+    public void Set(Item item, GameObject statsPanelType, bool actionAble, int price)
+    {
+        Set(item, statsPanelType);
+
+        if (actionAble)
+        {
+            UIaction.SetActive(true);
+            isAction = true;
             actualValue = price;
         }
         else
         {
-            UIsellBuy.SetActive(false);
-            isSellBuy = false;
+            UIaction.SetActive(false);
+            isAction = false;
         }
     }
 

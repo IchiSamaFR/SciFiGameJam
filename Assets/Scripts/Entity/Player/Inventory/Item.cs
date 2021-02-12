@@ -8,7 +8,7 @@ public class Item
     public string Id;
     public string Name;
     public string Type;
-    public GameObject Prefab;
+    public GameObject DropPrefab;
     public Sprite Sprite;
     public int Amount;
     public int MaxAmount;
@@ -17,12 +17,21 @@ public class Item
 
     public bool Full => Amount / MaxAmount == 1 ? true : false;
 
-    public Item(string Id, string Name, string Type, GameObject Prefab, Sprite Sprite, int MaxAmount = 100, int Price = 0, string Description = "")
+    public Item(string Id, string Name, string Type, GameObject DropPrefab, Sprite Sprite)
     {
         this.Id = Id;
         this.Name = Name;
         this.Type = Type;
-        this.Prefab = Prefab;
+        this.DropPrefab = DropPrefab;
+        this.Sprite = Sprite;
+        this.Amount = 0;
+    }
+    public Item(string Id, string Name, string Type, GameObject DropPrefab, Sprite Sprite, int MaxAmount = 100, int Price = 0, string Description = "")
+    {
+        this.Id = Id;
+        this.Name = Name;
+        this.Type = Type;
+        this.DropPrefab = DropPrefab;
         this.Sprite = Sprite;
         this.Amount = 0;
         this.MaxAmount = MaxAmount;
@@ -35,7 +44,7 @@ public class Item
         this.Id = item.Id;
         this.Name = item.Name;
         this.Type = item.Type;
-        this.Prefab = item.Prefab;
+        this.DropPrefab = item.DropPrefab;
         this.Sprite = item.Sprite;
         this.Amount = item.Amount;
         this.MaxAmount = item.MaxAmount;
@@ -43,6 +52,11 @@ public class Item
         this.Description = item.Description;
     }
 
+    public int SetAmount(int amount)
+    {
+        Amount = amount;
+        return 0;
+    }
     public int AddAmount(int amount)
     {
         Amount += amount;

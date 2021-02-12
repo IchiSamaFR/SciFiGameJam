@@ -34,6 +34,8 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         modelManager.ImageSelected.gameObject.SetActive(false);
+        modelManager.SetManager(this);
+        modelManager.SetTurrets("turret_mk10");
 
         UIButtonsManager.instance.ButtonNotInteractable("shop");
         UIButtonsManager.instance.GetButton("shop").GetComponent<UIBtnShop>()

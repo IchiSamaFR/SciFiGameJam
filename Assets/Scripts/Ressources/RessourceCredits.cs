@@ -7,7 +7,7 @@ public class RessourceCredits : Ressource
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             other.GetComponent<CollisionRedirect>().parent.GetComponent<PlayerInventory>().GetMoney(Amount);
 

@@ -31,6 +31,16 @@ public class PlayerStats : EntityStats
     {
         Init();
         RefreshUI();
+
+        Vector3 pos = this.transform.position;
+
+        Item _item = ItemCollection.instance.GetItem("turret_mk10");
+        _item.SetAmount(1);
+        GameObject _obj = Instantiate(_item.DropPrefab);
+        _obj.GetComponent<Ressource>().Set(_item);
+        _obj.transform.position = new Vector3(Random.Range(pos.x + 1f, pos.x + 1f),
+                                              0,
+                                              Random.Range(pos.z + 1f, pos.z + 1f));
     }
     
     void Update()

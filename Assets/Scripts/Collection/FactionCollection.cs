@@ -29,6 +29,11 @@ public class FactionCollection : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogError("Instance déjà crée, il ne peut y avoir 2 CollectionManager.");
+            return;
+        }
         instance = this;
     }
 
