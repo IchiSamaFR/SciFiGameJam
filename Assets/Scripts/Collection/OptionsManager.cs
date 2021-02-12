@@ -43,6 +43,25 @@ public class OptionsManager : MonoBehaviour
         }
         return 0;
     }
+    public bool SetVolume(string id, float value)
+    {
+        if (id == "ambient")
+        {
+            volumeAmbient = value;
+            return true;
+        }
+        else if (id == "fx")
+        {
+            volumeFX = value;
+            return true;
+        }
+        else if (id == "music")
+        {
+            volumeMusic = value;
+            return true;
+        }
+        return false;
+    }
 
     public void RefreshVolume()
     {

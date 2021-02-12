@@ -2,28 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class BtnFX : MonoBehaviour
 {
+    public bool HimSelf = false;
+
     AudioSource audioSource;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.loop = false;
-        audioSource.playOnAwake = false;
-        if (audioSource.isPlaying)
+        if (HimSelf)
         {
-            audioSource.Stop();
+            audioSource = GetComponent<AudioSource>();
+            audioSource.loop = false;
+            audioSource.playOnAwake = false;
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
 
     public void MakeSound()
     {
-        if(audioSource.clip == null)
+        if (!HimSelf)
         {
-            audioSource.clip = AudioCollection.instance.GetAudio("button");
+            FXAudio fxAudio = Instantiate(PrefabCollection.instance.GetPrefab("fxAudioBTN")).GetComponent<FXAudio>();
+            fxAudio.Set(AudioCollection.instance.GetAudio("button"));
         }
-        audioSource.Play();
+        else
+        {
+            if (audioSource.clip == null)
+            {
+                audioSource.clip = AudioCollection.instance.GetAudio("button");
+            }
+            audioSource.Play();
+        }
+
+
     }
 }

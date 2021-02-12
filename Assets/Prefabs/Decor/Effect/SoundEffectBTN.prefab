@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9059313559845321118}
   - component: {fileID: 9059313559845321113}
   - component: {fileID: 6089146939032684916}
-  - component: {fileID: -7988492988170462044}
+  - component: {fileID: -6630294698881728579}
   m_Layer: 0
-  m_Name: SoundEffect
+  m_Name: SoundEffectBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -141,7 +141,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-7988492988170462044
+--- !u!114 &-6630294698881728579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

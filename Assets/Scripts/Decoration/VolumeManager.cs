@@ -20,7 +20,14 @@ public class VolumeManager : MonoBehaviour
         this.volume = volume;
         if (externalVolume != -1)
         {
-            GetComponent<AudioSource>().volume = volume * externalVolume;
+            if (volume == 0)
+            {
+                GetComponent<AudioSource>().volume = 0;
+            }
+            else
+            {
+                GetComponent<AudioSource>().volume = volume * externalVolume;
+            }
         }
         else
         {
@@ -36,7 +43,7 @@ public class VolumeManager : MonoBehaviour
         }
         else
         {
-            GetComponent<AudioSource>().volume = volume * externalVolume;
+            GetComponent<AudioSource>().volume = volume;
         }
     }
 }

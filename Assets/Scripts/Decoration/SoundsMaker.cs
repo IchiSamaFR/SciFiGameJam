@@ -45,7 +45,5 @@ public class SoundsMaker : MonoBehaviour
             index = 0;
             actualTime = 0;
         }
-
-        audioSource.volume = volume;
     }
 }
