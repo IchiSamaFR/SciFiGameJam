@@ -96,6 +96,7 @@ public class ShopInventory : InventoryContainer
         container.SetInventoryContainer(this);
         RefreshUI();
         RefreshMoney();
+        target.PlayerManager.IsShop = true;
     }
 
     /* Close UI Shop
@@ -107,6 +108,7 @@ public class ShopInventory : InventoryContainer
 
         if (targetInv)
         {
+            targetInv.PlayerManager.IsShop = false;
             targetInv.ResetShop(this);
             targetInv = null;
         }

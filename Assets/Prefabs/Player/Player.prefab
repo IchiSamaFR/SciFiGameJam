@@ -5816,6 +5816,7 @@ GameObject:
   - component: {fileID: 7163459659481531756}
   - component: {fileID: 8616665717905321812}
   - component: {fileID: 396722584722970198}
+  - component: {fileID: 2153508127630218474}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -5870,6 +5871,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   playerStats: {fileID: 0}
   playerInventory: {fileID: 0}
+  hangarManager: {fileID: 0}
   modelManager: {fileID: 0}
 --- !u!114 &296538518174868178
 MonoBehaviour:
@@ -5940,6 +5942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6b0b45f5546e34db1a9fca4e7f5e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsToAdd: []
   items: []
   UIInv: {fileID: 2479370476462550722, guid: 5de91c629698fac4a94e48065615712d, type: 3}
   money: 100
@@ -5958,6 +5961,22 @@ MonoBehaviour:
   self: {fileID: 3828038924978270430}
   target: {fileID: 3828038923918050020}
   zoom: 0
+--- !u!114 &2153508127630218474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828038923918050023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48d3c863815c414b91e7a28b6fbc3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOpen: 0
+  playerInventory: {fileID: 0}
+  modelManager: {fileID: 0}
+  UIHangar: {fileID: 7325732304866238667, guid: 197bafc3a25b850408b485c9f252e9b4, type: 3}
 --- !u!1 &3828038924899958519
 GameObject:
   m_ObjectHideFlags: 0

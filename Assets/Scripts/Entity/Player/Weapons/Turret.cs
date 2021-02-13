@@ -61,6 +61,7 @@ public class Turret : MonoBehaviour
     public void SetManager(PlayerManager manager)
     {
         playerManager = manager;
+        aimTarget = false;
     }
     public void SetManager(AIManager manager)
     {

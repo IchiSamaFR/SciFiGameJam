@@ -10,7 +10,7 @@ public class ModelManager : MonoBehaviour
     [SerializeField]
     private Image imageMinimap;
 
-
+    
     [SerializeField]
     private List<TurretItem> turretsItem = new List<TurretItem>();
     [SerializeField]
@@ -87,6 +87,7 @@ public class ModelManager : MonoBehaviour
                     TurretItem _turretItem = ItemCollection.instance.GetTurretItem(item.Id);
                     Turret turret = Instantiate(_turretItem.InstancePrefab, _turretTrans).GetComponent<Turret>();
                     turret.SetStats(_turretItem);
+                    turretsItem.Add(_turretItem);
                     if (player)
                     {
                         turret.SetManager(player);
@@ -113,10 +114,21 @@ public class ModelManager : MonoBehaviour
         {
             foreach (Transform _turretTrans in TurretsContent)
             {
-                if (_turretTrans.GetChild(0) != null 
+                if (_turretTrans.childCount > 0
                     && _turretTrans.GetChild(0).GetComponent<Turret>().Id == item.Id)
                 {
                     Destroy(_turretTrans.GetChild(0).gameObject);
+
+                    int index = 0;
+                    while(turretsItem.Count > index)
+                    {
+                        if(turretsItem[index].Id == item.Id)
+                        {
+                            break;
+                        }
+                        index++;
+                    }
+                    turretsItem.RemoveAt(index);
                     return true;
                 }
             }
@@ -127,6 +139,7 @@ public class ModelManager : MonoBehaviour
 
     public void SetTurrets(Item item)
     {
+        turretsItem = new List<TurretItem>();
         foreach (Transform _turretTrans in TurretsContent)
         {
             if (_turretTrans.childCount > 0)
@@ -136,6 +149,8 @@ public class ModelManager : MonoBehaviour
             TurretItem _turretItem = ItemCollection.instance.GetTurretItem(item.Id);
             Turret turret = Instantiate(_turretItem.InstancePrefab, _turretTrans).GetComponent<Turret>();
             turret.SetStats(_turretItem);
+            turretsItem.Add(_turretItem);
+
             if (player)
             {
                 turret.SetManager(player);
@@ -148,6 +163,28 @@ public class ModelManager : MonoBehaviour
     }
     public void SetTurrets(string itemId)
     {
+        print("set");
         SetTurrets(ItemCollection.instance.GetItem(itemId));
+    }
+
+
+    public List<Item> GetEquipements()
+    {
+        List<Item> lst = new List<Item>();
+        
+        foreach (var item in turretsItem)
+        {
+            lst.Add(item);
+        }
+        foreach (var item in thrustersItem)
+        {
+            lst.Add(item);
+        }
+        foreach (var item in armorItem)
+        {
+            lst.Add(item);
+        }
+
+        return lst;
     }
 }

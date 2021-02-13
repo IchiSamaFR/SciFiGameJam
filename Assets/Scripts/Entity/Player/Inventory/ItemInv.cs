@@ -19,9 +19,6 @@ public class ItemInv : MonoBehaviour
     private bool statsOpen = false;
     private bool isAction = false;
 
-    Vector2 baseSize = new Vector2();
-    Vector2 statsSize = new Vector2();
-
     [Header("UI Objects")]
     private GameObject prebaStatsPanel;
     private GameObject statsPanel;

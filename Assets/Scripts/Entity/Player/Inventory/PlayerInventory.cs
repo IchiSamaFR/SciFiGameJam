@@ -6,7 +6,9 @@ using TMPro;
 public class PlayerInventory : InventoryContainer
 {
     [SerializeField]
-    List<Item> items = new List<Item>();
+    private List<string> itemsToAdd = new List<string>();
+    [SerializeField]
+    private List<Item> items = new List<Item>();
 
     [Header("UI Objects")]
     [SerializeField]
@@ -19,12 +21,27 @@ public class PlayerInventory : InventoryContainer
 
     public int Money { get => money; set => money = value; }
     public bool IsOpen { get => isOpen; set => isOpen = value; }
+    public PlayerManager PlayerManager { get => GetComponent<PlayerManager>(); }
+    public List<Item> Items { get => items; set => items = value; }
+    public ShopInventory ShopInventory { get => shopInventory; set => shopInventory = value; }
 
     void Start()
     {
+        
         container = Instantiate(UIInv, GameObject.Find("MainCanvas").transform)
                     .GetComponent<UIContainer>();
         Close();
+
+
+        foreach (var item in itemsToAdd)
+        {
+            Item _item = ItemCollection.instance.GetItem(item);
+            if (_item != null)
+            {
+                _item.Amount = 1;
+                GetItem(_item);
+            }
+        }
     }
     private void Update()
     {
@@ -114,11 +131,16 @@ public class PlayerInventory : InventoryContainer
 
     /* Add item in inventory
      */
-    public void GetItem(Item item)
+    public void GetItem(Item item, int amount = 0)
     {
-        if (item.Amount == 0)
+        if (item.Amount == 0 && amount == 0)
             return;
-        
+
+        if(amount != 0)
+        {
+            item.Amount = amount;
+        }
+
         foreach (Item _item in items)
         {
             if(item.Id == _item.Id && !_item.Full)
