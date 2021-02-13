@@ -135,8 +135,20 @@ public class ItemInv : MonoBehaviour
             stats += item.Price;
             stats += "\n";
         }
-        print(item.Description);
-        stats += "\n" + item.Description;
+
+        if(item.Type == "turret")
+        {
+            TurretItem turretItem = ItemCollection.instance.GetTurretItem(item.Id);
+            stats += "\nDamage  : " + turretItem.Damage;
+            stats += "\nFire Rate : " +  1 / turretItem.FireRate + " /s";
+            stats += "\nDps           : " + turretItem.Damage * 1 / turretItem.FireRate + " /s";
+        }
+
+        if (item.Description != "")
+        {
+            stats += "\n";
+            stats += "\n" + item.Description;
+        }
 
         return stats;
     }
