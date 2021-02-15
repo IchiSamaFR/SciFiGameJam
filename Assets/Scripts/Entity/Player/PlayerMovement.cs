@@ -34,8 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        UpdateRotation();
-        UpdateMovement();
+        if (playerManager.IsHangar)
+        {
+            rb.velocity = new Vector3();
+        }
+        else
+        {
+            UpdateRotation();
+            UpdateMovement();
+        }
     }
 
     void SetModelManager()
@@ -74,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 _forceToAdd += Brake(0.6f);
             }
         }
-        else if (Input.GetKey(brakeKey))
+        else
         {
             _forceToAdd += Brake();
         }

@@ -74,10 +74,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28939d46d1a29c049b08dc1b8f2d41ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  faction: 
+  maxHealth: 2
   actualHealth: 0
   maxShield: 0
   actualShield: 0
+  shieldRegen: 0
+  shieldRegenTime: 0
   maxSpeed: 0
   accelSpeed: 2
   brakeSpeed: 0.15

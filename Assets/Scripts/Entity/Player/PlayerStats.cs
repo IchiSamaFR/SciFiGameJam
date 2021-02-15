@@ -7,25 +7,7 @@ public class PlayerStats : EntityStats
 {
     [Header("GUI Health Shield")]
     [SerializeField]
-    private float pixelPerCent = 34f;
-    [SerializeField]
-    private float padding = 8f;
-    [SerializeField]
-    private float maxWidth = 500f;
-
-    float newDivider = 1;
-
-
-    [SerializeField]
-    private RectTransform healthFill;
-    [SerializeField]
-    private RectTransform healthBorder;
-    [SerializeField]
-    private RectTransform shieldFill;
-    [SerializeField]
-    private RectTransform shieldBorder;
-    float baseHealthWidth;
-    float baseShieldWidth;
+    private UIPlayerStats uiStats;
 
     void Start()
     {
@@ -34,6 +16,7 @@ public class PlayerStats : EntityStats
 
         Vector3 pos = this.transform.position;
 
+        /*
         Item _item = ItemCollection.instance.GetItem("turret_mk10");
         _item.SetAmount(1);
         GameObject _obj = Instantiate(_item.DropPrefab);
@@ -41,6 +24,7 @@ public class PlayerStats : EntityStats
         _obj.transform.position = new Vector3(Random.Range(pos.x + 1f, pos.x + 1f),
                                               0,
                                               Random.Range(pos.z + 1f, pos.z + 1f));
+        */
     }
     
     void Update()
@@ -66,23 +50,12 @@ public class PlayerStats : EntityStats
 
     void RefreshUI()
     {
-        if(pixelPerCent * MaxHealth > maxWidth && newDivider < maxWidth / pixelPerCent * MaxHealth)
-        {
-            newDivider = maxWidth / (pixelPerCent * MaxHealth);
-        }
-        if (pixelPerCent * MaxShield > maxWidth && newDivider < maxWidth / pixelPerCent * MaxShield)
-        {
-            newDivider = maxWidth / (pixelPerCent * MaxShield);
-        }
+        uiStats.RefreshUI(ActualHealth, MaxHealth, ActualShield, MaxShield);
+    }
 
-        healthBorder.sizeDelta = new Vector2(pixelPerCent * MaxHealth * newDivider,
-                                            healthBorder.sizeDelta.y);
-        healthFill.sizeDelta = new Vector2((healthBorder.sizeDelta.x - padding * 2) * ((float)ActualHealth / MaxHealth),
-                                            healthFill.sizeDelta.y);
-
-        shieldBorder.sizeDelta = new Vector2(pixelPerCent * MaxShield * newDivider,
-                                            shieldBorder.sizeDelta.y);
-        shieldFill.sizeDelta = new Vector2((shieldBorder.sizeDelta.x - padding * 2) * ((float)ActualShield / MaxShield), 
-                                            shieldFill.sizeDelta.y);
+    public override void GetDestroyed()
+    {
+        base.GetDestroyed();
+        MenuManager.instance.ChangeMenu("death");
     }
 }

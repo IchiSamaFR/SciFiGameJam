@@ -163,7 +163,6 @@ public class ModelManager : MonoBehaviour
     }
     public void SetTurrets(string itemId)
     {
-        print("set");
         SetTurrets(ItemCollection.instance.GetItem(itemId));
     }
 

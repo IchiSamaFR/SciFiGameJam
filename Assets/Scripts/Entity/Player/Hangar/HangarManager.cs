@@ -37,7 +37,6 @@ public class HangarManager : MonoBehaviour
 
     public void Open()
     {
-        print(isOpen);
         if (isOpen)
         {
             return;
@@ -46,6 +45,8 @@ public class HangarManager : MonoBehaviour
         UIButtonsManager.instance.ButtonActive("hangar");
         isOpen = true;
         hangar.Open(playerInventory, modelManager);
+
+        playerManager.SetCamera(1);
     }
     public void Close()
     {
@@ -58,6 +59,7 @@ public class HangarManager : MonoBehaviour
 
         isOpen = false;
         hangar.Close();
+        playerManager.SetCamera(0);
     }
 
     public void Refresh()

@@ -32,7 +32,7 @@ public class AIManager : MonoBehaviour
     private void Start()
     {
         modelManager.ImageSelected.gameObject.SetActive(true);
-        modelManager.SetTurrets("turret_mk10");
+        modelManager.SetTurrets(aiStats.weapons);
 
         foreach (Transform item in modelManager.TurretsContent)
         {

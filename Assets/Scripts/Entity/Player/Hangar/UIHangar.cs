@@ -74,9 +74,12 @@ public class UIHangar : MonoBehaviour
     public void Refresh(List<Item> items, string stockage)
     {
         DeleteContent(stockage);
-
+        /*
         string[] types = { "turret", "thruster", "shield" };
         string[] name = { "Turrets", "Thrusters", "Shields" };
+        */
+        string[] types = { "turret"};
+        string[] name = { "Turrets"};
 
         Transform content = ContentHangar;
 

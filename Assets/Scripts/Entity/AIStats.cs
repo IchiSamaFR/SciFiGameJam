@@ -12,6 +12,7 @@ public class AIStats : EntityStats
     }
 
 
+    public string weapons = "turret_mk10";
     [Header("AI Stats")]
     [SerializeField]
     private float rangeAttack = 7;

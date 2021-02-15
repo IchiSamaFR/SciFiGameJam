@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: 
-  maxHealth: 10
+  maxHealth: 2
   actualHealth: 0
   maxShield: 0
   actualShield: 0
+  shieldRegen: 0
+  shieldRegenTime: 0
   maxSpeed: 0
   accelSpeed: 2
   brakeSpeed: 0.15

@@ -24,6 +24,11 @@ public class UIBtnInventory : UIButton
     }
     public override void Open()
     {
+        if (playerInventory.PlayerManager.IsHangar)
+        {
+            playerInventory.PlayerManager.hangarManager.Close();
+        }
+
         playerInventory.Open();
     }
     public override void Close()

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BtnFX : MonoBehaviour
 {
-    public bool HimSelf = false;
+    [SerializeField]
+    private bool HimSelf = false;
 
     AudioSource audioSource;
 
@@ -24,12 +25,16 @@ public class BtnFX : MonoBehaviour
 
     public void MakeSound()
     {
+        if (!audioSource)
+        {
+            HimSelf = false;
+        }
         if (!HimSelf)
         {
             FXAudio fxAudio = Instantiate(PrefabCollection.instance.GetPrefab("fxAudioBTN")).GetComponent<FXAudio>();
             fxAudio.Set(AudioCollection.instance.GetAudio("button"));
         }
-        else
+        else if(HimSelf)
         {
             if (audioSource.clip == null)
             {

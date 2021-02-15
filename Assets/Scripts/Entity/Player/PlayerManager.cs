@@ -21,6 +21,12 @@ public class PlayerManager : MonoBehaviour
     
     UIOverCheck overCheck;
 
+    public List<GameObject> Cameras = new List<GameObject>();
+
+    public GameObject InteractKeyInv;
+    public GameObject InteractKeyHang;
+
+
     bool canShop = false;
     bool canHangar = false;
 
@@ -61,15 +67,58 @@ public class PlayerManager : MonoBehaviour
             .SetPlayer(playerInventory);
         UIButtonsManager.instance.GetButton("hangar").GetComponent<UIBtnHangar>()
             .SetModelManager(modelManager);
+
+        SetCamera(0);
+    }
+
+    public void SetCamera(int index)
+    {
+        int x = 0;
+        foreach (GameObject item in Cameras)
+        {
+            if (index == x)
+            {
+                item.SetActive(true);
+            }
+            else
+            {
+                item.SetActive(false);
+            }
+            x++;
+        }
     }
 
     private void Update()
     {
         CheckInputs();
+
+        if (Input.GetKeyDown("escape"))
+        {
+            MenuManager.instance.ChangeMenu("pause");
+        }
+
+        if (canShop)
+        {
+            InteractKeyInv.SetActive(true);
+        }
+        else
+        {
+            InteractKeyInv.SetActive(false);
+        }
+        if (canHangar)
+        {
+            InteractKeyHang.SetActive(true);
+        }
+        else
+        {
+            InteractKeyHang.SetActive(false);
+        }
     }
 
     private void CheckInputs()
     {
+        /* Check inputs to fire turrets
+         */
         if (Input.GetMouseButton(0) && !overCheck.IsPointerOverUIElement())
         {
             foreach (Transform item in modelManager.TurretsContent)
@@ -80,10 +129,12 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+
         if (Input.GetKeyDown(invKey) && !IsHangar)
         {
             if (canShop)
             {
+                InteractKeyInv.SetActive(true);
                 UIButtonsManager.instance.ActionButton("shop");
             }
             else
@@ -91,18 +142,10 @@ public class PlayerManager : MonoBehaviour
                 UIButtonsManager.instance.ActionButton("bag");
             }
         }
-        else if (Input.GetKeyDown("a"))
+        else if (Input.GetKeyDown(hangarKey))
         {
             if (canHangar)
             {
-                if (IsShop)
-                {
-                    playerInventory.ShopInventory.Close();
-                }
-                if (IsBag)
-                {
-                    playerInventory.Close();
-                }
                 UIButtonsManager.instance.ActionButton("hangar");
             }
         }

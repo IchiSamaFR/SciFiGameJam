@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -24,6 +25,9 @@ public class MenuManager : MonoBehaviour
         public string id;
         public TextMeshProUGUI text;
     }
+    public static MenuManager instance;
+
+    public GameObject background;
 
     public List<Menu> menus = new List<Menu>();
 
@@ -33,32 +37,59 @@ public class MenuManager : MonoBehaviour
 
     bool audioSet = false;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         ChangeMenu("main");
         RefreshOptionInputs();
     }
 
-    public void ChangeMenu(string id, string beforeId)
+    public virtual void ChangeMenu(string id, string beforeId)
     {
         if(id == "")
         {
             return;
         }
+        else if(id == "play")
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+        else if(id == "death" || id == "win")
+        {
+            Time.timeScale = 0;
+        }
+        else if (id == "options")
+        {
+            RefreshAudio();
+            audioSet = true;
+        }
+        else if (id == "pause")
+        {
+            Time.timeScale = 0;
+            id = "game_menu";
+        }
+        else if (id == "resume")
+        {
+            Time.timeScale = 1;
+        }
+        else if (id == "return_menu")
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
 
         bool find = false;
+        bool findId = false;
         foreach (Menu item in menus)
         {
             if(item.id == id)
             {
                 item.panel.SetActive(true);
-                if (item.id == "options")
-                {
-                    RefreshAudio();
-                    audioSet = true;
-                }
 
-
+                findId = true;
 
                 if (!find)
                     find = true;
@@ -74,6 +105,14 @@ public class MenuManager : MonoBehaviour
                 else
                     break;
             }
+        }
+        if (!findId && background)
+        {
+            background.SetActive(false);
+        }
+        else if (findId && background)
+        {
+            background.SetActive(true);
         }
     }
 
@@ -121,6 +160,8 @@ public class MenuManager : MonoBehaviour
         GetText("inputForward").text = "Forward : " + KeyCollection.forwardKey;
         GetText("inputBackward").text = "Backward : " + KeyCollection.backwardKey;
         GetText("inputInventory").text = "Interract : " + KeyCollection.invKey;
+        GetText("inputHangar").text = "Hangar : " + KeyCollection.hangarKey;
+        GetText("inputBrake").text = "Brake : " + "L. Shift";
     }
 
     public void RedirectURL(string url)

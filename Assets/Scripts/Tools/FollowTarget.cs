@@ -10,6 +10,7 @@ public class FollowTarget : MonoBehaviour
 
     private void Start()
     {
+        target = FindObjectOfType<PlayerManager>().transform;
         difference = transform.position - target.position;
     }
 

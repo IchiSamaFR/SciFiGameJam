@@ -36,6 +36,11 @@ public class UIBtnShop : UIButton
         if (!shopInv)
             return;
 
+        if (playerInventory.PlayerManager.IsHangar)
+        {
+            playerInventory.PlayerManager.hangarManager.Close();
+        }
+
         playerInventory.Close();
         shopInv.Open(playerInventory);
     }

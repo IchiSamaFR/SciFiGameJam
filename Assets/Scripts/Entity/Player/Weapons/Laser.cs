@@ -31,7 +31,11 @@ public class Laser : MonoBehaviour
             if (_entity != null && _entity.Faction != faction)
             {
                 _entity.GetDamage(damage);
+
             }
+            GameObject obj = Instantiate(PrefabCollection.instance.GetPrefab("fxAudio"));
+            obj.transform.position = transform.position;
+            obj.GetComponent<FXAudio>().Set(AudioCollection.instance.GetAudio("hit"));
             Destroy(gameObject);
         }
         else

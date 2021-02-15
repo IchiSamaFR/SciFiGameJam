@@ -38,6 +38,15 @@ public class UIBtnHangar : UIButton
     {
         if (!hangar.playerInventory || !hangar.modelManager)
             return;
+
+        if (hangar.playerManager.IsShop)
+        {
+            hangar.playerManager.playerInventory.ShopInventory.Close();
+        }
+        if (hangar.playerManager.IsBag)
+        {
+            hangar.playerManager.playerInventory.Close();
+        }
         
         hangar.Open();
     }
