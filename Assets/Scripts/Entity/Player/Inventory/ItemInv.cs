@@ -87,6 +87,8 @@ public class ItemInv : MonoBehaviour
         {
             uiContainer.ItemButtonAction(item, false);
         }
+        FXAudio fxAudio = Instantiate(PrefabCollection.instance.GetPrefab("fxAudioBTN")).GetComponent<FXAudio>();
+        fxAudio.Set(AudioCollection.instance.GetAudio("button"));
     }
 
     public void CreateStatsPanel()

@@ -87,6 +87,10 @@ public class PlayerInventory : InventoryContainer
 
     public override void ItemButtonAction(Item item, bool all)
     {
+        if (item.Amount <= 0)
+        {
+            return;
+        }
         int amount = 0;
         if (all)
             amount = item.Amount;
@@ -96,12 +100,12 @@ public class PlayerInventory : InventoryContainer
         Item toSend = new Item(item);
         
 
-        int returned = shopInventory.Buy(toSend, amount, this);
+        int returned = shopInventory.PlayerSell(toSend, amount, this);
 
         RemoveItem(item, amount - returned);
     }
 
-    public int Buy(Item item, int amount, int costUnit, ShopInventory shop)
+    public int PlayerBuy(Item item, int amount, int costUnit, ShopInventory shop)
     {
         int canBuy = (int)(money / costUnit);
         int rest = 0;

@@ -13,19 +13,13 @@ public class PixelRenderer : MonoBehaviour
     protected void Start()
     {
     	cam = GetComponent<Camera>();
-    	
-        if (!SystemInfo.supportsImageEffects)
-        {
-            enabled = false;
-            return;
-        }
     }
     void Update() {
 
         float ratio = ((float)cam.pixelHeight / (float)cam.pixelWidth);
         h = Mathf.RoundToInt(w * ratio);
-        
     }
+
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         source.filterMode = FilterMode.Point;

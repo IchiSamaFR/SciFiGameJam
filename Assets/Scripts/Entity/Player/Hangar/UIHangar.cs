@@ -121,7 +121,7 @@ public class UIHangar : MonoBehaviour
                 {
                     if (item.Type == type)
                     {
-                        ItemHangar hang = Instantiate(Item, content).GetComponent<ItemHangar>();
+                        ItemHangar hang = Instantiate(ItemShip, content).GetComponent<ItemHangar>();
                         hang.SetParent(hangar);
                         hang.Set(item, StatsPanel, stockage);
                     }

@@ -74,6 +74,11 @@ public class AIStats : EntityStats
 
     void CreateDrop()
     {
+        if (!drop)
+        {
+            return;
+        }
+
         Vector3 pos = transform.position;
 
         for (int i = 0; i < ressourcesToDrop.Count; i++)

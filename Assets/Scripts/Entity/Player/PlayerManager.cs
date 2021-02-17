@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-
-using static KeyCollection;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCamera))]
@@ -23,13 +22,17 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> Cameras = new List<GameObject>();
 
-    public GameObject InteractKeyInv;
-    public GameObject InteractKeyHang;
+    [Header("Interract")]
+    [SerializeField]
+    private GameObject interactContent;
+    [SerializeField]
+    private GameObject interactKeyPref;
+    private GameObject interactKey;
+    private GameObject interactKeyHang;
 
 
     bool canShop = false;
     bool canHangar = false;
-
     bool isShop = false;
     
     public bool IsShop { get => isShop; set => isShop = value; }
@@ -68,6 +71,13 @@ public class PlayerManager : MonoBehaviour
         UIButtonsManager.instance.GetButton("hangar").GetComponent<UIBtnHangar>()
             .SetModelManager(modelManager);
 
+        UIButtonsManager.instance.GetButton("menu").GetComponent<UIBtnPause>()
+            .SetPlayer(playerInventory);
+
+        interactKey = Instantiate(interactKeyPref, interactContent.transform);
+        interactKeyHang = Instantiate(interactKeyPref, interactContent.transform);
+
+
         SetCamera(0);
     }
 
@@ -92,34 +102,37 @@ public class PlayerManager : MonoBehaviour
     {
         CheckInputs();
 
-        if (Input.GetKeyDown("escape"))
-        {
-            MenuManager.instance.ChangeMenu("pause");
-        }
-
         if (canShop)
         {
-            InteractKeyInv.SetActive(true);
+            interactKey.SetActive(true);
+            interactKey.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = KeyCollection.interactKey.ToUpper();
         }
         else
         {
-            InteractKeyInv.SetActive(false);
+            interactKey.SetActive(false);
         }
+
         if (canHangar)
         {
-            InteractKeyHang.SetActive(true);
+            interactKeyHang.SetActive(true);
+            interactKey.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = KeyCollection.hangarKey.ToUpper();
         }
         else
         {
-            InteractKeyHang.SetActive(false);
+            interactKeyHang.SetActive(false);
         }
     }
 
     private void CheckInputs()
     {
+        if (Input.GetKeyDown("escape"))
+        {
+            UIButtonsManager.instance.ActionButton("menu");
+        }
+
         /* Check inputs to fire turrets
          */
-        if (Input.GetMouseButton(0) && !overCheck.IsPointerOverUIElement())
+        if (Input.GetMouseButton(0) && !overCheck.IsPointerOverUIElement() && !IsHangar)
         {
             foreach (Transform item in modelManager.TurretsContent)
             {
@@ -130,24 +143,18 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(invKey) && !IsHangar)
+
+        if (canShop && Input.GetKeyDown(KeyCollection.interactKey) && !IsHangar)
         {
-            if (canShop)
-            {
-                InteractKeyInv.SetActive(true);
-                UIButtonsManager.instance.ActionButton("shop");
-            }
-            else
-            {
-                UIButtonsManager.instance.ActionButton("bag");
-            }
+            UIButtonsManager.instance.ActionButton("shop");
         }
-        else if (Input.GetKeyDown(hangarKey))
+        else if (Input.GetKeyDown(KeyCollection.invKey) && !IsHangar)
         {
-            if (canHangar)
-            {
-                UIButtonsManager.instance.ActionButton("hangar");
-            }
+            UIButtonsManager.instance.ActionButton("bag");
+        }
+        else if (Input.GetKeyDown(KeyCollection.hangarKey) && canHangar)
+        {
+            UIButtonsManager.instance.ActionButton("hangar");
         }
     }
 

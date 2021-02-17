@@ -12,7 +12,6 @@ public class ItemHangar : MonoBehaviour
     private TextMeshProUGUI UIname;
     [SerializeField]
     private GameObject UIaction;
-    private bool statsOpen = false;
     private string stockage;
 
     [Header("UI Objects")]
@@ -51,6 +50,8 @@ public class ItemHangar : MonoBehaviour
             print(hangar);
             hangar.ItemButtonAction(item, false, stockage);
         }
+        FXAudio fxAudio = Instantiate(PrefabCollection.instance.GetPrefab("fxAudioBTN")).GetComponent<FXAudio>();
+        fxAudio.Set(AudioCollection.instance.GetAudio("button"));
     }
 
     public void CreateStatsPanel()

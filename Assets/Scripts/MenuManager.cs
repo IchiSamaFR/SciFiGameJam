@@ -37,6 +37,8 @@ public class MenuManager : MonoBehaviour
 
     bool audioSet = false;
 
+    public string actualMenu = "";
+
     private void Awake()
     {
         instance = this;
@@ -50,7 +52,7 @@ public class MenuManager : MonoBehaviour
 
     public virtual void ChangeMenu(string id, string beforeId)
     {
-        if(id == "")
+        if (id == "")
         {
             return;
         }
@@ -118,7 +120,8 @@ public class MenuManager : MonoBehaviour
 
     public void ChangeMenu(string id)
     {
-        ChangeMenu(id, "");
+        actualMenu = id;
+        ChangeMenu(actualMenu, "");
     }
 
     public void RefreshAudio()

@@ -7,7 +7,7 @@ public static class KeyCollection
     public static string leftKey = "q";
     public static string rightKey = "d";
     public static string brakeKey = "left shift";
-    public static string interractKey = "e";
+    public static string interactKey = "e";
     public static string invKey = "i";
     public static string hangarKey = "a";
 

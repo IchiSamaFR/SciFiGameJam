@@ -42,8 +42,7 @@ public class AIManager : MonoBehaviour
             }
         }
     }
-
-    int x = 0;
+    
     void Update()
     {
         CheckFire();
